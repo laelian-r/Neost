@@ -5,11 +5,13 @@ import { StyleSheet, StatusBar, Image, ic} from 'react-native';
 import HomeScreen from './app/screens/homeScreen';
 import MessageScreen from './app/screens/MessageScreen';
 import ProfilScreen from './app/screens/ProfilScreen';
+import detailArtist from './app/screens/detailArtists';
 import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen';
 import * as NavigationBar from 'expo-navigation-bar';
 
 
 const Tab = createBottomTabNavigator();
+
 
 function App() {
   NavigationBar.setBackgroundColorAsync("#1e1e1e")
@@ -28,6 +30,7 @@ function App() {
   }
   return (
     <>
+    
         <StatusBar backgroundColor="#1e1e1e"/>
     <NavigationContainer>
       <Tab.Navigator
@@ -42,16 +45,18 @@ function App() {
         }}
       >
 
-        <Tab.Screen name="Accueil" component={HomeScreen} 
+        <Tab.Screen name="Accueil" component={HomeScreen}
+
         options={{
               tabBarIcon: ({ focused }) => (
                 <Image
                   source={focused 
                     ? require('./assets/icon-active-home.png') 
                     : require('./assets/icon-home.png')}
-                  style={{ width: 20, height: 20 }}
+                  style={{ width: 30, height: 30 }}
                 />
               ),
+              tabBarShowLabel: false
             }} />
         <Tab.Screen name="Message" component={MessageScreen}
         options={{
@@ -60,9 +65,10 @@ function App() {
               source={focused 
                 ? require('./assets/icon-active-messages.png') 
                 : require('./assets/icon-messages.png')}
-              style={{ width: 20, height: 20 }}
+              style={{ width: 30, height: 30 }}
             />
           ),
+          tabBarShowLabel: false
         }}
         />
         <Tab.Screen name="profil" component={ProfilScreen}
@@ -72,11 +78,15 @@ function App() {
               source={focused 
                 ? require('./assets/icon-active-profile.png') 
                 : require('./assets/icon-profile.png')}
-              style={{ width: 20, height: 20 }}
+              style={{ width: 30, height: 30 }}
             />
           ),
+          tabBarShowLabel: false
         }}
         /> 
+
+          
+      <Tab.Screen name="autreProfil" component={detailArtist}/>
       </Tab.Navigator>
     </NavigationContainer>
     </>
@@ -85,7 +95,8 @@ function App() {
 }
 const styles = StyleSheet.create({
   bar:{
-    backgroundColor:'#1e1e1e'
+    backgroundColor:'#1e1e1e',
+    marginTop: 50,
   }
 });
 
