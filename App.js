@@ -1,53 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import { Button, Text, View, StyleSheet, Image, StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StyleSheet, StatusBar, Image, ic} from 'react-native';
 import HomeScreen from './app/screens/homeScreen';
-import MessageScreen from './app/screens/MessageScreen';
+import DetailArtiste from './app/screens/DetailArtists';
 import ProfilScreen from './app/screens/ProfilScreen';
-import detailArtist from './app/screens/detailArtists';
-import { widthPercentageToDP, heightPercentageToDP } from 'react-native-responsive-screen';
+import MessageScreen from './app/screens/MessageScreen';
 import * as NavigationBar from 'expo-navigation-bar';
+
+const HomeStack = createNativeStackNavigator();
+
+function HomeStackScreen() {
+  return (
+    <HomeStack.Navigator screenOptions={{headerShown: false}}>
+      <HomeStack.Screen name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="DetailArtiste" component={DetailArtiste} />
+    </HomeStack.Navigator>
+  );
+}
+
+const SettingsStack = createNativeStackNavigator();
 
 
 const Tab = createBottomTabNavigator();
 
-
-function App() {
+export default function App() {
   NavigationBar.setBackgroundColorAsync("#1e1e1e")
-
-  class YourComponent extends React.Component {
-    render() {
-      const isActive = this.props.active || false;
-      const icon = isActive
-        ? require('./assets/icon-active-home.png')
-        : require('./assets/icon-home.png');
-  
-      return (
-        <Image source={icon} />
-      );
-    }
-  }
   return (
     <>
-    
-        <StatusBar backgroundColor="#1e1e1e"/>
+    <StatusBar backgroundColor="#1e1e1e"/>
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarStyle: {
-            backgroundColor: '#1e1e1e', // Couleur de fond de la barre de tabulation
-          },
-          tabBarActiveTintColor: '#fff', // Couleur des icônes et du texte actifs
-          tabBarInactiveTintColor: '#777', // Couleur des icônes et du texte inactifs
-        headerShown: false,
+      <Tab.Navigator screenOptions={{
+      tabBarStyle: {
+        backgroundColor: '#1e1e1e', // Couleur de fond de la barre de tabulation
+      },
+      tabBarActiveTintColor: '#fff', // Couleur des icônes et du texte actifs
+      tabBarInactiveTintColor: '#777', // Couleur des icônes et du texte inactifs
+      headerShown: false,
 
-        }}
-      >
-
-        <Tab.Screen name="Accueil" component={HomeScreen}
-
-        options={{
+    }}>
+        <Tab.Screen name="Accueil" component={HomeStackScreen}  options={{
               tabBarIcon: ({ focused }) => (
                 <Image
                   source={focused 
@@ -57,9 +50,8 @@ function App() {
                 />
               ),
               tabBarShowLabel: false
-            }} />
-        <Tab.Screen name="Message" component={MessageScreen}
-        options={{
+            }}/>
+        <Tab.Screen name="message" component={MessageScreen}  options={{
           tabBarIcon: ({ focused }) => (
             <Image
               source={focused 
@@ -69,10 +61,8 @@ function App() {
             />
           ),
           tabBarShowLabel: false
-        }}
-        />
-        <Tab.Screen name="profil" component={ProfilScreen}
-        options={{
+        }}/>
+        <Tab.Screen name="profile" component={ProfilScreen} options={{
           tabBarIcon: ({ focused }) => (
             <Image
               source={focused 
@@ -82,22 +72,17 @@ function App() {
             />
           ),
           tabBarShowLabel: false
-        }}
-        /> 
-
-          
-      <Tab.Screen name="autreProfil" component={detailArtist}/>
+        }}/>
       </Tab.Navigator>
     </NavigationContainer>
     </>
-    
+
   );
 }
+
 const styles = StyleSheet.create({
   bar:{
     backgroundColor:'#1e1e1e',
     marginTop: 50,
   }
 });
-
-export default App;

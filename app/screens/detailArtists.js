@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
-const detailArtiste = ({ route }) => {
+const DetailArtiste = ({ route }) => {
   const { artistData } = route.params;
 
   return (
@@ -25,30 +25,42 @@ const detailArtiste = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
+    alignItems: 'start',
+    backgroundColor: '#1e1e1e',
+    alignItems: 'center'
+  },
+  imageContainer: {
+      alignItems: 'center',
+      borderRadius: 15
   },
   image: {
-    width: 150,
-    height: 150,
-    borderRadius: 15,
+      borderRadius: 15,
+      height: 300,
+      width: 310
+  },
+  restContainer: {
+      padding: 20,
   },
   name: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginTop: 10,
+      color: '#b2b9c1',
+      fontSize: 25,
+      fontWeight: 'bold',
+      marginTop: 5,
+      textAlign: 'start',
   },
   role: {
-    fontSize: 20,
-    color: 'gray',
-    marginTop: 5,
+      fontSize: 15,
+      color: '#b2b9c1',
+      marginTop: 2,
+      textAlign: 'start',
+      fontWeight: 'bold',
   },
   description: {
-    fontSize: 16,
-    marginTop: 10,
-    textAlign: 'center',
-  },
+      fontSize: 14,
+      marginTop: 2,
+      textAlign: 'start',
+      color: 'gray'
+  }
 });
 
-export default detailArtiste;
+export default DetailArtiste;

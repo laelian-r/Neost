@@ -8,7 +8,7 @@ const MessageScreen = () => {
 
   return (
     <View style={styles.screen}>
-      <Text style={styles.text}>Ecran message</Text>
+      <Text style={styles.text}>Message</Text>
     </View>
   );
 };

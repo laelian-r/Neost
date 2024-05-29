@@ -14,17 +14,15 @@ const HomeScreen = () => {
   const artists = [
     {
     imageUrl: 'https://yt3.googleusercontent.com/KJdScqhPK6AQxMzUj5Vv7nPwcZvCvd14lXtTL5_IGuF7wXKNxa1c5hIDTci2m1DYBIep_3oVD44=s176-c-k-c0x00ffffff-no-rj',
-    backgroundImage: 'https://yt3.googleusercontent.com/KJdScqhPK6AQxMzUj5Vv7nPwcZvCvd14lXtTL5_IGuF7wXKNxa1c5hIDTci2m1DYBIep_3oVD44=s176-c-k-c0x00ffffff-no-rj',
     name: 'Derow',
     role: 'Rappeur',
-    description: 'un talentueux rappeur'
+    description: 'Lorem ipsum'
   },  
   {
     imageUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/39/4f/61/394f61d5-25a6-f121-a5f1-3a32e56ee02b/artwork.jpg/316x316cc.webp',
-    backgroundImage: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/39/4f/61/394f61d5-25a6-f121-a5f1-3a32e56ee02b/artwork.jpg/316x316cc.webp',
-    name: 'Artist Two',
-    role: 'Singer',
-    description: 'A famous singer',
+    name: 'V€nus',
+    role: 'Rappeur',
+    description: 'Lorem ipsum',
   },
 ];
 
@@ -35,8 +33,9 @@ const HomeScreen = () => {
           value={number}
           style={styles.search}
           placeholder="Rechercher"
-          placeholderTextColor="#1e1e1e"
+          placeholderTextColor="#aaa"
         />
+
       <Text style={styles.text}>Genre :</Text>
       <RNPickerSelect
         onValueChange={(value) => setSelectedSport(value)}
@@ -75,6 +74,7 @@ const HomeScreen = () => {
         ]}
         placeholder={{ label: 'Séléctioner un genre musical', value: null }}
       />
+      
       <Text style={styles.text}>Quelle est la spécialité que vous cherchez ?</Text>
       <RNPickerSelect
         style={styles.select}
@@ -125,9 +125,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   search: {
-    height: 40,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    borderRadius: 25,
+    height: 50,
+    backgroundColor: '#333',
+    borderRadius: 100,
     paddingLeft: 25,
     marginBottom: 25,
   },
@@ -147,8 +147,8 @@ const styles = StyleSheet.create({
   artistImage: {
     width: 100,
     height: 100,
-    borderRadius: 50,
-    marginBottom: 10,
+    borderRadius: 150,
+    marginBottom: 150,
   },
   artistName: {
     color: '#fff',
@@ -170,3 +170,36 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
+
+// import {ImageBackground, StyleSheet, Text} from 'react-native';
+// import { View, TextInput, Image, ScrollView } from 'react-native';
+
+// const image = {uri: 'https://legacy.reactjs.org/logo-og.png'};
+
+// const App = () => (
+//   <View style={styles.container}>
+//     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+//       <Text style={styles.text}>Inside</Text>
+//     </ImageBackground>
+//   </View>
+// );
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//   },
+//   image: {
+//     flex: 1,
+//     justifyContent: 'center',
+//   },
+//   text: {
+//     color: 'white',
+//     fontSize: 42,
+//     lineHeight: 84,
+//     fontWeight: 'bold',
+//     textAlign: 'center',
+//     backgroundColor: '#000000c0',
+//   },
+// });
+
+// export default App;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { View, Text, Image, ImageBackground, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { BlurView } from 'expo-blur';
 
 const ArtistProfile = ({ artistData }) => {
@@ -20,22 +21,23 @@ const ArtistProfile = ({ artistData }) => {
     }, [artistData]);
 
     const navigateToProfile = () => {
-        // Remplacez 'Profile' par le nom de votre écran de profil
-        navigation.navigate('autreProfil', { artistData: artistData });
+        navigation.navigate('DetailArtiste', { artistData: artistData });
     };
 
     return (
-        <View style={styles.container}>
+        <View style={styles.container} blurRadius={5}>
             <View style={styles.imageContainer}>
             <Image
                 style={styles.image}
                 source={{ uri: artistInfo.imageUrl }}
-              />
-              <Image
+                // blurRadius={10}
+            />
+            {/* <Image
                 style={styles.backgroundImage}
                 source={{ uri: artistInfo.backgroundImage }}
-                blurRadius={5}
-              />
+                blurRadius={10}
+            /> */}
+            {/* <ImageBackground source={artistInfo.backgroundImage} resizeMode="cover" style={styles.backgroundImage}></ImageBackground> */}
             </View>
             <View style={styles.restContainer}>
                 <Text style={styles.name}>{artistInfo.name}</Text>
@@ -54,54 +56,50 @@ const styles = StyleSheet.create({
         alignItems: 'start',
         marginTop: 10,
         marginBottom: 50,
-        borderWidth: 1,
-        borderRadius: 20,
-        borderColor: 'white',
+        borderRadius: 15,
+        backgroundColor: '#333',
     },
     imageContainer: {
         alignItems: 'center',
-    },
-    backgroundImage: {
-      flex: 1,
-      width: 1000,
-      alignItems: 'center',
-      justifyContent: 'center',
+        borderRadius: 15
     },
     image: {
-        width: 200,
-        height: 200,
         borderRadius: 15,
-        marginTop: '150',
-        marginBottom: '150',
+        height: 300,
+        width: wp('80%')
     },
     restContainer: {
         padding: 20,
     },
     name: {
-        fontSize: 18,
+        color: '#b2b9c1',
+        fontSize: 25,
         fontWeight: 'bold',
         marginTop: 5,
         textAlign: 'start',
     },
     role: {
-        fontSize: 16,
-        color: 'gray',
+        fontSize: 15,
+        color: '#b2b9c1',
         marginTop: 2,
         textAlign: 'start',
+        fontWeight: 'bold',
     },
     description: {
         fontSize: 14,
         marginTop: 2,
         textAlign: 'start',
+        color: 'gray'
     },
     button: {
-        backgroundColor: '#1e1e1e',
-        borderRadius: 25,
+        backgroundColor: '#333',
+        borderRadius: 100,
         borderWidth: 1,
         borderColor: '#fff',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
+        paddingVertical: 7,
+        paddingHorizontal: 7,
         marginTop: 20,
+        width: 130,
     },
     buttonText: {
         color: '#fff',
