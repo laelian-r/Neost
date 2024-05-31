@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
 
+
 const DetailArtiste = ({ route }) => {
 
   const { artistData } = route.params;

@@ -3,6 +3,7 @@ import { View, Text, Image, ImageBackground, StyleSheet, Button, Pressable } fro
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { BlurView } from 'expo-blur';
+import { loginId } from '../screens/login';
 
 const ArtistProfile = ({ artistData }) => {
     const navigation = useNavigation();
@@ -32,13 +33,18 @@ const ArtistProfile = ({ artistData }) => {
     const navigateToProfile = () => {
         navigation.navigate('DetailArtiste', { artistData: artistData });
     };
+
+    if (loginId === artistInfo.id) {
+        return null;
+    }
+
     return (
         <View style={styles.container} blurRadius={5}>
             <View style={styles.imageContainer}>
             {artistInfo.imageUrl ? (<Image
                 style={styles.image}
                 source={{uri : artistInfo.imageUrl}}
-            />):(
+            />):(   
                 <Image
                 style={styles.image}
                 source={{ uri: 'https://www.logiquetechno.com/wp-content/uploads/2020/11/retirer-photo-de-profil-facebook.png' }}
