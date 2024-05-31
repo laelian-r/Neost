@@ -27,17 +27,17 @@ const ArtistProfile = ({ artistData }) => {
     return (
         <View style={styles.container} blurRadius={5}>
             <View style={styles.imageContainer}>
-            <Image
+            {artistInfo.imageUrl ? (<Image
                 style={styles.image}
                 source={{ uri: artistInfo.imageUrl }}
                 // blurRadius={10}
+            />):(
+                <Image
+                style={styles.image}
+                source={{ uri: 'https://www.logiquetechno.com/wp-content/uploads/2020/11/retirer-photo-de-profil-facebook.png' }}
+                // blurRadius={10}
             />
-            {/* <Image
-                style={styles.backgroundImage}
-                source={{ uri: artistInfo.backgroundImage }}
-                blurRadius={10}
-            /> */}
-            {/* <ImageBackground source={artistInfo.backgroundImage} resizeMode="cover" style={styles.backgroundImage}></ImageBackground> */}
+            )}
             </View>
             <View style={styles.restContainer}>
                 <Text style={styles.name}>{artistInfo.name}</Text>

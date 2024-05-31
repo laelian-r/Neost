@@ -1,40 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { BlurView } from '@react-native-community/blur';
 import RNPickerSelect from 'react-native-picker-select';
 import ArtistProfile from '../composent/artistInfo';
+import fakeData from '../../fakeData.json';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const [number, onChangeNumber] = useState('');
   const [selectedSport, setSelectedSport] = useState('');
+  const [artists, setArtists] = useState([]);
 
-  const artists = [
-    {
-    imageUrl: 'https://yt3.googleusercontent.com/KJdScqhPK6AQxMzUj5Vv7nPwcZvCvd14lXtTL5_IGuF7wXKNxa1c5hIDTci2m1DYBIep_3oVD44=s176-c-k-c0x00ffffff-no-rj',
-    name: 'Derow',
-    role: 'Rappeur',
-    description: 'Lorem ipsum'
-  },  
-  {
-    imageUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/39/4f/61/394f61d5-25a6-f121-a5f1-3a32e56ee02b/artwork.jpg/316x316cc.webp',
-    name: 'V€nus',
-    role: 'Rappeur',
-    description: 'Lorem ipsum',
-  },
-];
+
+  useEffect(() => {
+    setArtists(fakeData)
+  }, []);
 
   return (
     <ScrollView style={styles.screen}>
-        <TextInput
-          onChangeText={onChangeNumber}
-          value={number}
-          style={styles.search}
-          placeholder="Rechercher"
-          placeholderTextColor="#aaa"
-        />
+      <TextInput
+        onChangeText={onChangeNumber}
+        value={number}
+        style={styles.search}
+        placeholder="Rechercher"
+        placeholderTextColor="#aaa"
+      />
 
       <Text style={styles.text}>Genre :</Text>
       <RNPickerSelect
@@ -105,10 +97,10 @@ const HomeScreen = () => {
       />
 
       <View>
-      {artists.map((artist, index) => (
-        <ArtistProfile key={index} artistData={artist} />
-      ))}
-    </View>
+        {artists.map((artist, index) => (
+          <ArtistProfile key={index} artistData={artist} />
+        ))}
+      </View>
     </ScrollView>
   );
 };
@@ -170,36 +162,3 @@ const styles = StyleSheet.create({
 });
 
 export default HomeScreen;
-
-// import {ImageBackground, StyleSheet, Text} from 'react-native';
-// import { View, TextInput, Image, ScrollView } from 'react-native';
-
-// const image = {uri: 'https://legacy.reactjs.org/logo-og.png'};
-
-// const App = () => (
-//   <View style={styles.container}>
-//     <ImageBackground source={image} resizeMode="cover" style={styles.image}>
-//       <Text style={styles.text}>Inside</Text>
-//     </ImageBackground>
-//   </View>
-// );
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//   },
-//   image: {
-//     flex: 1,
-//     justifyContent: 'center',
-//   },
-//   text: {
-//     color: 'white',
-//     fontSize: 42,
-//     lineHeight: 84,
-//     fontWeight: 'bold',
-//     textAlign: 'center',
-//     backgroundColor: '#000000c0',
-//   },
-// });
-
-// export default App;
