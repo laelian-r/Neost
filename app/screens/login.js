@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import fakeData from '../../fakeData.json'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// Extraire la fonction Register en dehors du composant
 const goToRegisterScreen = (navigation) => {
   navigation.navigate('Register');
 };
@@ -11,10 +12,30 @@ const LoginScreen = ({ onLoginSuccess }) => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [artists, setArtists] = useState([]);
+
+  useEffect(() => {
+    setArtists(fakeData);
+  }, []);
+
+  const storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem('id', value)
+      console.log(value)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
 
   const handleLogin = () => {
     if (email && password) {
-      onLoginSuccess();
+        artists.map((artist) => {
+             if(artist.email === email && artist.password ===password){
+                storeData(toString(artist.id))
+                onLoginSuccess()
+             }
+        })
     } else {
       alert('Veuillez remplir tous les champs.');
     }
@@ -41,13 +62,13 @@ const LoginScreen = ({ onLoginSuccess }) => {
         secureTextEntry
       />
       
-      <TouchableOpacity style={styles.button} onPress={() => goToRegisterScreen(navigation)}>
+      <Pressable style={styles.button} onPress={() => goToRegisterScreen(navigation)}>
         <Text style={styles.buttonText}>Si vous n'avez pas de compte</Text>
-      </TouchableOpacity>
+      </Pressable>
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+      <Pressable style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Se connecter</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, Image, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { BlurView } from '@react-native-community/blur';
 import RNPickerSelect from 'react-native-picker-select';
 import ArtistProfile from '../composent/artistInfo';
 import fakeData from '../../fakeData.json';
+
 
 const HomeScreen = () => {
   const navigation = useNavigation();

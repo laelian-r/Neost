@@ -22,12 +22,17 @@
       "package": "neost.fr"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/favicon.png"
     },
     "extra": {
       "eas": {
         "projectId": "41539a56-f5b9-41df-81db-505887e8e925"
       }
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, ImageBackground, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { View, Text, Image, ImageBackground, StyleSheet, Button, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { BlurView } from 'expo-blur';
@@ -43,9 +43,9 @@ const ArtistProfile = ({ artistData }) => {
                 <Text style={styles.name}>{artistInfo.name}</Text>
                 <Text style={styles.role}>{artistInfo.role}</Text>
                 <Text style={styles.description}>{artistInfo.description}</Text>
-                <TouchableOpacity onPress={navigateToProfile} style={styles.button}>
+                <Pressable onPress={navigateToProfile} style={styles.button}>
                     <Text style={styles.buttonText}>Voir plus</Text>
-                </TouchableOpacity>
+                </Pressable>
             </View>
         </View>
     );

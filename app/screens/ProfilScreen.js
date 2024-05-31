@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import fakeData from '../../fakeData.json';
+import { getItem } from '../tools/AsyncStorage';
 
 const ProfilScreen = () => {
   const navigation = useNavigation();
@@ -12,9 +13,11 @@ const ProfilScreen = () => {
   const [isEditingRole, setIsEditingRole] = useState(false);
   const [newName, setNewName] = useState('');
   const [newRole, setNewRole] = useState('');
-
+  let index; 
   useEffect(() => {
     setArtists(fakeData);
+    index = getItem('id')
+    console.log(index)
   }, []);
 
   useEffect(() => {
@@ -76,12 +79,12 @@ const ProfilScreen = () => {
             ) : (
               <View style={styles.textContainer}>
                 <Text style={styles.text}>{artist.name}</Text>
-                <TouchableOpacity onPress={handleNameChange}>
+                <Pressable onPress={handleNameChange}>
                   <Image
                     style={{ width: 20, height: 20 }}
                     source={require('../../assets/iconCrayon.png')}
                   />
-                </TouchableOpacity>
+                </Pressable>
               </View>
             )}
             {isEditingRole ? (
@@ -95,12 +98,12 @@ const ProfilScreen = () => {
             ) : (
               <View style={styles.textContainer}>
                 <Text style={styles.text}>{artist.role}</Text>
-                <TouchableOpacity onPress={handleRoleChange}>
+                <Pressable onPress={handleRoleChange}>
                   <Image
                     style={{ width: 20, height: 20 }}
                     source={require('../../assets/iconCrayon.png')}
                   />
-                </TouchableOpacity>
+                </Pressable>
               </View>
             )}
           </View>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 
 
@@ -79,9 +79,9 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
         placeholder={{ label: 'Séléctioner un métier', value: null }}
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleRegister}>
+      <Pressable style={styles.button} onPress={handleRegister}>
         <Text style={styles.buttonText}>S'inscrire</Text>
-      </TouchableOpacity>
+      </Pressable>
       
     </View>
   );

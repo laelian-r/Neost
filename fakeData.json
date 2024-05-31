@@ -1,6 +1,8 @@
 [
     {
       "id":1,
+      "email":"derow@email.com",
+      "password":"derow",
     "imageUrl": "https://yt3.googleusercontent.com/KJdScqhPK6AQxMzUj5Vv7nPwcZvCvd14lXtTL5_IGuF7wXKNxa1c5hIDTci2m1DYBIep_3oVD44=s176-c-k-c0x00ffffff-no-rj",
     "name": "Derow",
     "role": "Rappeur",
@@ -10,6 +12,8 @@
   },  
   {
     "id":2,
+    "email":"venus@email.com",
+    "password":"Venus",
     "imageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/39/4f/61/394f61d5-25a6-f121-a5f1-3a32e56ee02b/artwork.jpg/316x316cc.webp",
     "name": "V€nus",
     "role": "Rappeur",

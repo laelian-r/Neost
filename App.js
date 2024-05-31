@@ -28,7 +28,7 @@ const AuthStackScreen = ({ setIsAuthenticated }) => {
 
 const LoginStack = createNativeStackNavigator();
 
-const LoginStackScreen = ({ setIsLogin, setIsAuthenticated }) => {
+const LoginStackScreen = ({ setIsLogin }) => {
   return (
     <LoginStack.Navigator screenOptions={{ headerShown: false }}>
       <LoginStack.Screen
@@ -38,10 +38,10 @@ const LoginStackScreen = ({ setIsLogin, setIsAuthenticated }) => {
         )}
       />
       <LoginStack.Screen
-        name="Register"
-        component={() => (
-          <RegisterScreen onRegisterSuccess={() => setIsAuthenticated(true)} />
-        )}
+      name="Register"
+      component={() => (
+        <RegisterScreen onRegisterSuccess={() => setIsAuthenticated(true)} />
+      )}
       />
     </LoginStack.Navigator>
   );
