@@ -28,7 +28,7 @@ const AuthStackScreen = ({ setIsAuthenticated }) => {
 
 const LoginStack = createNativeStackNavigator();
 
-const LoginStackScreen = ({ setIsLogin }) => {
+const LoginStackScreen = ({ setIsLogin, setIsAuthenticated }) => {
   return (
     <LoginStack.Navigator screenOptions={{ headerShown: false }}>
       <LoginStack.Screen
