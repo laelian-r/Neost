@@ -10,6 +10,8 @@ const goToRegisterScreen = (navigation) => {
   navigation.navigate('Register');
 };
 
+let loginId;
+
 const LoginScreen = ({ onLoginSuccess }) => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
@@ -34,7 +36,8 @@ const LoginScreen = ({ onLoginSuccess }) => {
     if (email && password) {
         artists.map((artist) => {
              if(artist.email === email && artist.password ===password){
-                storeData(toString(artist.id))
+                  loginId = artist.id
+                
                 onLoginSuccess()
              }
         })
@@ -131,4 +134,5 @@ const styles = StyleSheet.create({
   },
 });
 
+export {loginId}
 export default LoginScreen;

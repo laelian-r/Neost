@@ -5,17 +5,23 @@ const DetailArtiste = ({ route }) => {
 
   const { artistData } = route.params;
   const [newFollowers, setNewFollowers] = useState('')
+  const [isFollowing, setIsFollowing] = useState(false);
 
 
   useEffect(() => {
-      if (foundArtist) {
-        setNewFollowers(artistData.followers);
-      }
-    })
+    if (artistData) {
+      setNewFollowers(artistData.followers);
+    }
+  }, [artistData]);
 
-  const follow = ()=>{
-
-  }
+  const toggleFollow = () => {
+    setNewFollowers((prevFollowers) => {
+      const updatedFollowers = isFollowing ? prevFollowers - 1 : prevFollowers + 1;
+      return updatedFollowers;
+    });
+    setIsFollowing(!isFollowing);
+  };
+    
   return (
     <View style={styles.container}>
       {artistData.imageUrl ? (<Image
@@ -34,10 +40,11 @@ const DetailArtiste = ({ route }) => {
       <Text style={styles.name}>{artistData.name}</Text>
       <Text style={styles.role}>{artistData.role}</Text>
       <Text style={styles.description}>{artistData.description}</Text>
-      <Text style={styles.role}>followers : {artistData.followers} </Text>
+      <Text style={styles.role}>followers : {newFollowers} </Text>
       <Text style={styles.role}>suivie : {artistData.suivie} </Text>
-      <Pressable onPress={follow} style={styles.button}>
-        <Text style={styles.buttonText}>suivres</Text>
+      
+      <Pressable onPress={toggleFollow} style={styles.button}>
+        <Text style={styles.buttonText}>{isFollowing ? 'Ne plus suivre' : 'Suivre'}</Text>
       </Pressable>
     </View>
   );

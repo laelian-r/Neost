@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, Pressable, TextInput } from 'react-nativ
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import fakeData from '../../fakeData.json';
-import { getItem } from '../tools/AsyncStorage';
+import { loginId } from './login';
 import RNPickerSelect from 'react-native-picker-select';
 
 const ProfilScreen = () => {
@@ -27,7 +27,7 @@ const ProfilScreen = () => {
 
   useEffect(() => {
     if (artists.length > 0) {
-      const foundArtist = artists.find(artist => artist.id === 1);
+      const foundArtist = artists.find(artist => artist.id === loginId);
       setArtist(foundArtist);
       if (foundArtist) {
         setNewName(foundArtist.name);
