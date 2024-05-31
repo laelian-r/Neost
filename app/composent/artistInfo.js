@@ -20,29 +20,35 @@ const ArtistProfile = ({ artistData }) => {
         }
     }, [artistData]);
 
+    const reduceDescription = (description, limit) => {
+        const words = description.split(' '); 
+        if (words.length > limit) {
+            return words.slice(0, limit).join(' ') + '...'; 
+        } else {
+            return description;
+        }
+    };
+
     const navigateToProfile = () => {
         navigation.navigate('DetailArtiste', { artistData: artistData });
     };
-
     return (
         <View style={styles.container} blurRadius={5}>
             <View style={styles.imageContainer}>
             {artistInfo.imageUrl ? (<Image
                 style={styles.image}
-                source={{ uri: artistInfo.imageUrl }}
-                // blurRadius={10}
+                source={{uri : artistInfo.imageUrl}}
             />):(
                 <Image
                 style={styles.image}
                 source={{ uri: 'https://www.logiquetechno.com/wp-content/uploads/2020/11/retirer-photo-de-profil-facebook.png' }}
-                // blurRadius={10}
             />
             )}
             </View>
             <View style={styles.restContainer}>
                 <Text style={styles.name}>{artistInfo.name}</Text>
                 <Text style={styles.role}>{artistInfo.role}</Text>
-                <Text style={styles.description}>{artistInfo.description}</Text>
+                <Text style={styles.description}>{reduceDescription(artistInfo.description, 5)}...</Text>
                 <Pressable onPress={navigateToProfile} style={styles.button}>
                     <Text style={styles.buttonText}>Voir plus</Text>
                 </Pressable>

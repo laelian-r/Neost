@@ -1,15 +1,32 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
 
 const DetailArtiste = ({ route }) => {
-  const { artistData } = route.params;
 
+  const { artistData } = route.params;
+  const [newFollowers, setNewFollowers] = useState('')
+
+
+  useEffect(() => {
+      if (foundArtist) {
+        setNewFollowers(artistData.followers);
+      }
+    })
+
+  const follow = ()=>{
+
+  }
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.image}
-        source={{ uri: artistData.imageUrl }}
-      />
+      {artistData.imageUrl ? (<Image
+                style={styles.image}
+                source={{uri : artistData.imageUrl}}
+            />):(
+                <Image
+                style={styles.image}
+                source={{ uri: 'https://www.logiquetechno.com/wp-content/uploads/2020/11/retirer-photo-de-profil-facebook.png' }}
+            />
+            )}
       <Image
         style={styles.backgroundImage}
         source={{ uri: artistData.backgroundImage }}
@@ -17,7 +34,11 @@ const DetailArtiste = ({ route }) => {
       <Text style={styles.name}>{artistData.name}</Text>
       <Text style={styles.role}>{artistData.role}</Text>
       <Text style={styles.description}>{artistData.description}</Text>
-      {/* Ajoutez plus d'informations sur l'artiste ici */}
+      <Text style={styles.role}>followers : {artistData.followers} </Text>
+      <Text style={styles.role}>suivie : {artistData.suivie} </Text>
+      <Pressable onPress={follow} style={styles.button}>
+        <Text style={styles.buttonText}>suivres</Text>
+      </Pressable>
     </View>
   );
 };

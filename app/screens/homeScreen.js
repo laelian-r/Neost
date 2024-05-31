@@ -1,44 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, Image, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { View, Text, StyleSheet, TextInput, ScrollView } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
 import ArtistProfile from '../composent/artistInfo';
 import fakeData from '../../fakeData.json';
-
+import { widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
-  const [number, onChangeNumber] = useState('');
-  const [selectedSport, setSelectedSport] = useState('');
+  const [searchText, setSearchText] = useState('');
+  const [selectJob, setSelectJob] = useState('');
+  const [selectStyle, setSelectStyle] = useState('');
   const [artists, setArtists] = useState([]);
 
+  useEffect(() => {
+    setArtists(fakeData);
+  }, []);
 
   useEffect(() => {
-    setArtists(fakeData)
-  }, []);
+    const filteredArtists = fakeData.filter(artist => {
+      const jobMatch = selectJob ? artist.role === selectJob : true;
+      const styleMatch = selectStyle ? artist.genre === selectStyle : true;
+      const searchMatch = searchText ? 
+        artist.name.toLowerCase().includes(searchText.toLowerCase()) ||
+        artist.role.toLowerCase().includes(searchText.toLowerCase()) ||
+        (artist.genre && artist.genre.toLowerCase().includes(searchText.toLowerCase()))
+        : true;
+      return jobMatch && styleMatch && searchMatch;
+    });
+    setArtists(filteredArtists);
+  }, [selectJob, selectStyle, searchText]);
 
   return (
     <ScrollView style={styles.screen}>
       <TextInput
-        onChangeText={onChangeNumber}
-        value={number}
+        onChangeText={text => setSearchText(text)}
+        value={searchText}
         style={styles.search}
-        placeholder="Rechercher"
+        placeholder="Rechercher par nom, genre ou métier"
         placeholderTextColor="#aaa"
       />
 
       <Text style={styles.text}>Genre :</Text>
       <RNPickerSelect
-        onValueChange={(value) => setSelectedSport(value)}
+        onValueChange={(value) => setSelectStyle(value)}
         items={[
-          { label: 'Rap', value: 'Rap' },
           { label: 'Variété', value: 'Variété' },
           { label: 'Jazz', value: 'Jazz' },
           { label: 'Rock', value: 'Rock' },
           { label: 'Pop', value: 'Pop' },
           { label: 'Classique', value: 'Classique' },
-          { label: 'Hip-Hop', value: 'Hip-Hop' },
+          { label: 'Rap', value: 'Hip-Hop/Rap' },
           { label: 'Reggae', value: 'Reggae' },
           { label: 'Electro', value: 'Electro' },
           { label: 'Blues', value: 'Blues' },
@@ -64,19 +74,23 @@ const HomeScreen = () => {
           { label: 'Dancehall', value: 'Dancehall' },
           { label: 'Bluegrass', value: 'Bluegrass' },
         ]}
-        placeholder={{ label: 'Séléctioner un genre musical', value: null }}
+        style={{
+          inputIOS: styles.inputIOS,
+          inputAndroid: styles.inputAndroid,
+          iconContainer: styles.iconContainer,
+        }}
+        placeholder={{ label: "Aucun genre pédéfini", value: null }}
       />
-      
-      <Text style={styles.text}>Quelle est la spécialité que vous cherchez ?</Text>
+
+      <Text style={styles.text}>Métier :</Text>
       <RNPickerSelect
-        style={styles.select}
-        onValueChange={(value) => setSelectedSport(value)}
+        onValueChange={(value) => setSelectJob(value)}
         items={[
-          { label: 'Chanteur', value: 'Chanteur' },
-          { label: 'Rappeur', value: 'Rappeur' },
+          { label: 'Chanteur/Chanteuse', value: 'Chanteur/Chanteuse' },
+          { label: 'Rappeur/Rappeuse', value: 'Rappeur/Rappeuse' },
           { label: 'Guitariste', value: 'Guitariste' },
           { label: 'Bassiste', value: 'Bassiste' },
-          { label: 'Batteur', value: 'Batteur' },
+          { label: 'Batteur/Batteuse', value: 'Batteur/Batteuse' },
           { label: 'Claviériste', value: 'Claviériste' },
           { label: 'Pianiste', value: 'Pianiste' },
           { label: 'Violoniste', value: 'Violoniste' },
@@ -87,13 +101,18 @@ const HomeScreen = () => {
           { label: 'Tromboniste', value: 'Tromboniste' },
           { label: 'Percussionniste', value: 'Percussionniste' },
           { label: 'Harmoniciste', value: 'Harmoniciste' },
-          { label: 'Compositeur', value: 'Compositeur' },
-          { label: 'Arrangeur', value: 'Arrangeur' },
-          { label: 'Producteur', value: 'Producteur' },
-          { label: 'Ingénieur du son', value: 'Ingénieur du son' },
-          { label: 'DJ', value: 'DJ' },
+          { label: 'Compositeur/Compositrice', value: 'Compositeur/Compositrice' },
+          { label: 'Arrangeur/Arrangeuse', value: 'Arrangeur/Arrangeuse' },
+          { label: 'Producteur/Productrice', value: 'Producteur/Productrice' },
+          { label: 'Ingénieur(e) du son', value: 'Ingénieur(e) du son' },
+          { label: 'DJ', value: 'DJ' }
         ]}
-        placeholder={{ label: 'Séléctioner un métier', value: null }}
+        style={{
+          inputIOS: styles.inputIOS,
+          inputAndroid: styles.inputAndroid,
+          iconContainer: styles.iconContainer
+        }}
+        placeholder={{ label: "Sélectionner un métier", value: null }}
       />
 
       <View>
@@ -111,54 +130,43 @@ const styles = StyleSheet.create({
     backgroundColor: '#1e1e1e',
     padding: hp('5%'),
   },
-  blurContainer: {
-    borderRadius: 25,
-    overflow: 'hidden',
-    marginBottom: 20,
-  },
   search: {
     height: 50,
     backgroundColor: '#333',
     borderRadius: 100,
     paddingLeft: 25,
     marginBottom: 25,
+    color: '#fff',
   },
+  
   text: {
     color: '#fff',
     marginBottom: 10,
   },
-  select: {
-    color: 'white',
-    borderWidth: 2,
-    borderColor: 'white',
-  },  
-  artistContainer: {
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  artistImage: {
-    width: 100,
-    height: 100,
-    borderRadius: 150,
-    marginBottom: 150,
-  },
-  artistName: {
-    color: '#fff',
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  artistRole: {
-    color: '#fff',
+  inputIOS: {
     fontSize: 16,
-    marginBottom: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderRadius: 100,
+    color: 'white',
+    paddingRight: 30,
+    backgroundColor: '#333',
+    marginBottom: 20
   },
-  artistDescription: {
-    color: '#fff',
-    fontSize: 14,
-    textAlign: 'center',
-    paddingHorizontal: 20,
+  inputAndroid: {
+    fontSize: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderRadius: 100,
+    color: 'white',
+    paddingRight: 30,
+    backgroundColor: '#333',
+    marginBottom: 20
   },
+  iconContainer: {
+    top: 10,
+    right: 12,
+  }
 });
 
 export default HomeScreen;

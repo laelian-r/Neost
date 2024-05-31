@@ -3,6 +3,8 @@ import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import fakeData from '../../fakeData.json'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 
 const goToRegisterScreen = (navigation) => {
   navigation.navigate('Register');
@@ -61,13 +63,13 @@ const LoginScreen = ({ onLoginSuccess }) => {
         placeholderTextColor="#fff"
         secureTextEntry
       />
-      
-      <Pressable style={styles.button} onPress={() => goToRegisterScreen(navigation)}>
-        <Text style={styles.buttonText}>Si vous n'avez pas de compte</Text>
+
+      <Pressable style={styles.logIn} onPress={handleLogin}>
+        <Text style={styles.logInText}>Se connecter</Text>
       </Pressable>
 
-      <Pressable style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Se connecter</Text>
+      <Pressable style={styles.signUp} onPress={() => goToRegisterScreen(navigation)}>
+        <Text style={styles.signUpText}>S'inscrire</Text>
       </Pressable>
     </View>
   );
@@ -88,26 +90,44 @@ const styles = StyleSheet.create({
   },
   input: {
     width: '80%',
-    height: 40,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
+    height: 50,
+    borderRadius: 50,
+    backgroundColor: '#333',
+    paddingTop: 15,
+    paddingRight: 15,
+    paddingBottom: 15,
+    paddingLeft: 15,
     paddingHorizontal: 10,
     marginBottom: 20,
     color: 'white',
   },
-  button: {
+  logIn: {
     width: '80%',
     height: 40,
-    backgroundColor: '#007bff',
+    backgroundColor: '#1e1e1e',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 5,
-    marginBottom: 10,
+    borderRadius: 50,
+    borderWidth: 1,
+    borderColor: 'white',
   },
-  buttonText: {
+  logInText: {
     color: '#fff',
     fontSize: 16,
+  },
+  signUp: {
+    width: '80%',
+    height: 40,
+    justifyContent: 'center',
+    borderRadius: 5,
+    marginBottom: 10
+  },
+  signUpText: {
+    color: '#fff',
+    fontSize: 16,
+    textDecorationLine: 'underline',
+    textDecorationStyle: 'solid',
+    textDecorationColor: 'white'
   },
 });
 

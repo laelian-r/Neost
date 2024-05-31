@@ -10,6 +10,7 @@ import MessageScreen from './app/screens/MessageScreen';
 import RegisterScreen from './app/screens/register';
 import LoginScreen from './app/screens/login';
 import * as NavigationBar from 'expo-navigation-bar';
+import { StatusBar } from 'react-native';
 
 const AuthStack = createNativeStackNavigator();
 
@@ -66,7 +67,11 @@ export default function App() {
   const [isLogin, setIsLogin] = React.useState(false);
 
   return (
-    
+
+    <>
+        <StatusBar
+        backgroundColor="#1e1e1e"
+      />
     <NavigationContainer>
       {isLogin || isAuthenticated ? (
         <Tab.Navigator
@@ -135,5 +140,7 @@ export default function App() {
       )}
       
     </NavigationContainer>
+    </>
+  
   );
 }
