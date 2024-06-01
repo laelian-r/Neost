@@ -20,6 +20,18 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
 
   const handleRegister = () => {
     if(email && password && name && SelectJob && description){
+      const newArtist = {
+        id:1,
+        email:email,
+        password:toString(password),
+        imageUrl:"",
+        name:name,
+        role:SelectJob,
+        description:description,
+        followers:0,
+        suivie:0,
+        genre:"",
+      }
       onRegisterSuccess();
     }
     else{
