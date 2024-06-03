@@ -2,18 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, Image, ImageBackground, StyleSheet, Button, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { BlurView } from 'expo-blur';
 import { loginId } from '../screens/login';
 
 const ArtistProfile = ({ artistData }) => {
     const navigation = useNavigation();
-    const [artistInfo, setArtistInfo] = useState({
-        imageUrl: '',
-        backgroundImage: '',
-        name: '',
-        role: '',
-        description: ''
-    });
+    const [artistInfo, setArtistInfo] = useState('');
 
     useEffect(() => {
         if (artistData) {

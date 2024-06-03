@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TextInput, ScrollView } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import ArtistProfile from '../composent/artistInfo';
+import ArtistProfile from '../composent/profilArtist';
 import fakeData from '../../fakeData.json';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
