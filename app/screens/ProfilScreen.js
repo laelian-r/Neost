@@ -5,6 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import fakeData from '../../fakeData.json';
 import { loginId } from './login';
 import RNPickerSelect from 'react-native-picker-select';
+import Divider from '../components/Drivers';
 
 const ProfilScreen = () => {
   const navigation = useNavigation();
@@ -114,7 +115,7 @@ const ProfilScreen = () => {
     <ScrollView style={styles.screen}>
       {artist ? (
         <>
-          <View>
+          <View style={styles.test}>
           {artist.imageUrl ? (<Image
                 style={styles.image}
                 source={{uri : artist.imageUrl}}
@@ -243,6 +244,13 @@ const ProfilScreen = () => {
                 <Text style={styles.text}>{artist.description}</Text>
               </View>
             )}
+            
+
+          <View>
+            <Divider />
+            <Divider />
+          </View>
+          
           </View>
 
           <View style={styles.fieldsContainer}>
@@ -272,6 +280,9 @@ const styles = StyleSheet.create({
     paddingRight: hp('5%'),
     paddingBottom: hp('3%'),
     paddingLeft: hp('5%'),
+  },
+  test: {
+    paddingBottom: hp('3%')
   },
   textContainer: {
     flexDirection: 'row',
