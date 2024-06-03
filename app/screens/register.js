@@ -8,6 +8,7 @@ const goToLoginScreen = (navigation) => {
   navigation.navigate('Login');
 };
 
+
 const RegisterScreen = ({ onRegisterSuccess }) => {
   const navigation = useNavigation();
   const [name, setName] = useState('');
@@ -16,7 +17,37 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
   const [SelectJob, setSelectJob] = useState('');
   const [selectStyle, setSelectStyle] = useState('');
   const [description, setDescription] = useState('');
+  const [erreur, setErreur] = useState(false);
 
+  const changeTextName = (e)=>{
+    setName(e)
+    setErreur(false)
+  }
+
+  const changeTextEmail = (e)=>{
+    setEmail(e)
+    setErreur(false)
+  }
+
+  const changeTextPassword = (e)=>{
+    setPassword(e)
+    setErreur(false)
+  }
+
+  const changeSelectJob = (e)=>{
+    setSelectJob(e)
+    setErreur(false)
+  }
+
+  const changeSelectStyle = (e)=>{
+    setSelectStyle(e)
+    setErreur(false)
+  }
+
+  const changeTextDescription = (e)=>{
+    setDescription(e)
+    setErreur(false)
+  }
 
   const handleRegister = () => {
     if(email && password && name && SelectJob && description){
@@ -35,7 +66,7 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
       onRegisterSuccess();
     }
     else{
-        alert('Veuillez remplir tous les champs.');
+      setErreur(true)
     }
   };
 
@@ -49,14 +80,14 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
       <TextInput
         style={styles.input}
         value={name}
-        onChangeText={setName}
+        onChangeText={changeTextName}
         placeholder="Nom"
         placeholderTextColor="#aaa"
       />
       <TextInput
         style={styles.input}
         value={email}
-        onChangeText={setEmail}
+        onChangeText={changeTextEmail}
         placeholder="Adresse e-mail"
         keyboardType="email-address"
         placeholderTextColor="#aaa"
@@ -65,7 +96,7 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
       <TextInput
         style={styles.input}
         value={password}
-        onChangeText={setPassword}
+        onChangeText={changeTextPassword}
         placeholder="Mot de passe"
         placeholderTextColor="#aaa"
         secureTextEntry
@@ -74,7 +105,7 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
       <View style={styles.inputsSelect}>
       <Text style={styles.text}>Genre :</Text>
       <RNPickerSelect
-        onValueChange={(value) => setSelectStyle(value)}
+        onValueChange={(value) => changeSelectStyle(value)}
         items={[
           { label: 'Variété', value: 'Variété' },
           { label: 'Jazz', value: 'Jazz' },
@@ -117,7 +148,7 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
 
       <Text style={styles.text}>Métier :</Text>
       <RNPickerSelect
-        onValueChange={(value) => setSelectJob(value)}
+        onValueChange={(value) => changeSelectJob(value)}
         items={[
           { label: 'Chanteur/Chanteuse', value: 'Chanteur/Chanteuse' },
           { label: 'Rappeur/Rappeuse', value: 'Rappeur/Rappeuse' },
@@ -152,14 +183,18 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
       <TextInput
         style={styles.description}
         underlineColorAndroid="transparent"
-        placeholder="Décrivez votre univers musical"
+        placeholder="Décrivez-vous de la façon la plus détaillée possible."
         placeholderTextColor={'#aaa'}
         numberOfLines={10}
         multiline={true}
         value={description}
-        onChangeText={setDescription}
+        onChangeText={changeTextDescription}
       />
-
+      {erreur ? (
+        <Text style={styles.error}>Veuillez remplir les bonnes informations</Text>
+      ):(
+       <Text></Text> 
+      )}
       <Pressable style={styles.signUp} onPress={handleRegister}>
         <Text style={styles.signUpText}>S'inscrire</Text>
       </Pressable>
@@ -214,7 +249,7 @@ const styles = StyleSheet.create({
   },
   
   text: {
-    color: '#fff',
+    color: 'white',
     marginBottom: 10,
   },
   description: {
@@ -225,7 +260,7 @@ const styles = StyleSheet.create({
     height: hp('20%'),
     marginBottom: 20,
     backgroundColor: '#333',
-    color: '#fff'
+    color: 'white'
   },
   signUp: {
     width: '80%',
@@ -238,7 +273,7 @@ const styles = StyleSheet.create({
     borderColor: 'white',
   },
   signUpText: {
-    color: '#fff',
+    color: 'white',
     fontSize: 16,
   },
   logIn: {
@@ -249,7 +284,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   logInText: {
-    color: '#fff',
+    color: 'white',
     fontSize: 16,
     textDecorationLine: 'underline',
     textDecorationStyle: 'solid',
@@ -279,6 +314,9 @@ const styles = StyleSheet.create({
   iconContainer: {
     top: 10,
     right: 12,
+  },
+  error:{
+    color:'red'
   }
 });
 

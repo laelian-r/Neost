@@ -3,7 +3,6 @@ import { View, Text, Image, ImageBackground, StyleSheet, Button, Pressable } fro
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { loginId } from '../screens/login';
-import DetailArtiste from '../screens/DetailArtists';
 
 const ArtistProfile = ({ artistData }) => {
     const navigation = useNavigation();
@@ -45,7 +44,7 @@ const ArtistProfile = ({ artistData }) => {
                 <Image
                 style={styles.image}
                 source={{ uri: 'https://www.logiquetechno.com/wp-content/uploads/2020/11/retirer-photo-de-profil-facebook.png' }}
-            />
+                />
             )}
             </View>
             <View style={styles.restContainer}>
@@ -104,14 +103,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#333',
         borderRadius: 100,
         borderWidth: 1,
-        borderColor: '#fff',
+        borderColor: 'white',
         paddingVertical: 7,
         paddingHorizontal: 7,
         marginTop: 20,
         width: 130,
     },
     buttonText: {
-        color: '#fff',
+        color: 'white',
         fontSize: 16,
         textAlign: 'center',
     },

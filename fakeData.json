@@ -2,14 +2,14 @@
   {
     "id": 1,
     "email": "derow.beats92@gmail.com",
-    "password": "derow",
+    "password": "Derow",
     "imageUrl": "https://ugc.production.linktr.ee/78e61f7a-cf37-4e4c-bf62-a8d72a65c73c_IMG-20231217-183742-601.jpeg",
     "name": "Derow",
     "role": "Rappeur/Rappeuse",
-    "description": "Derow est un rappeur talentueux avec une passion pour les paroles percutantes et les rythmes captivants. Son style unique et son énergie sur scène le distinguent dans l'industrie musicale. PS: Tu dis vraiment d'la merde Chat GPT",
+    "description": "Venez me rejoindre dans mon univers",
     "followers": 190,
     "suivie": 220,
-    "genre": "Hip-Hop"
+    "genre": "Hip-Hop/Rap"
   },
   {
     "id": 2,
@@ -18,10 +18,10 @@
     "imageUrl": "",
     "name": "V€nus",
     "role": "Rappeur/Rappeuse",
-    "description": "V€nus est une rappeuse émergente connue pour son flow impressionnant et ses paroles engagées. Elle apporte une nouvelle perspective au monde du rap avec son style distinctif et sa voix percutante.",
+    "description": "Je fais du son et je kiffe ça",
     "followers": 19,
     "suivie": 22,
-    "genre": "Trap"
+    "genre": "Ambiant"
   },
   {
     "id": 3,

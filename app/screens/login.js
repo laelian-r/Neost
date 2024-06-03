@@ -12,11 +12,24 @@ const goToRegisterScreen = (navigation) => {
 
 let loginId;
 
+
+
 const LoginScreen = ({ onLoginSuccess }) => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [artists, setArtists] = useState([]);
+  const [erreur, setErreur] = useState(false);
+
+  const changeTextEmail = (e)=>{
+    setEmail(e)
+    setErreur(false)
+  }
+
+  const changeTextPassword = (e)=>{
+    setPassword(e)
+    setErreur(false)
+  }
 
   useEffect(() => {
     setArtists(fakeData);
@@ -40,9 +53,12 @@ const LoginScreen = ({ onLoginSuccess }) => {
                 
                 onLoginSuccess()
              }
+             else {
+              setErreur(true)
+            }
         })
     } else {
-      alert('Veuillez remplir tous les champs.');
+      setErreur(true)
     }
   };
 
@@ -52,21 +68,25 @@ const LoginScreen = ({ onLoginSuccess }) => {
       <TextInput
         style={styles.input}
         value={email}
-        onChangeText={setEmail}
+        onChangeText={changeTextEmail}
         placeholder="Adresse e-mail"
         keyboardType="email-address"
-        placeholderTextColor="#fff"
+        placeholderTextColor="white"
         autoCapitalize="none"
       />
       <TextInput
         style={styles.input}
         value={password}
-        onChangeText={setPassword}
+        onChangeText={changeTextPassword}
         placeholder="Mot de passe"
-        placeholderTextColor="#fff"
+        placeholderTextColor="white"
         secureTextEntry
       />
-
+      {erreur ? (
+        <Text style={styles.error}>Veuillez remplir les bonnes informations</Text>
+      ):(
+       <Text></Text> 
+      )}
       <Pressable style={styles.logIn} onPress={handleLogin}>
         <Text style={styles.logInText}>Se connecter</Text>
       </Pressable>
@@ -115,7 +135,7 @@ const styles = StyleSheet.create({
     borderColor: 'white',
   },
   logInText: {
-    color: '#fff',
+    color: 'white',
     fontSize: 16,
   },
   signUp: {
@@ -126,12 +146,15 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   signUpText: {
-    color: '#fff',
+    color: 'white',
     fontSize: 16,
     textDecorationLine: 'underline',
     textDecorationStyle: 'solid',
     textDecorationColor: 'white'
   },
+  error:{
+    color:'red'
+  }
 });
 
 export {loginId}

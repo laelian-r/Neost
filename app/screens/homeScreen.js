@@ -39,40 +39,74 @@ const HomeScreen = () => {
         placeholderTextColor="#aaa"
       />
 
+<Text style={styles.text}>Métier :</Text>
+      <RNPickerSelect
+        onValueChange={(value) => setSelectJob(value)}
+        items={[
+          { label: 'Arrangeur/Arrangeuse', value: 'Arrangeur/Arrangeuse' },
+          { label: 'Bassiste', value: 'Bassiste' },
+          { label: 'Batteur/Batteuse', value: 'Batteur/Batteuse' },
+          { label: 'Chanteur/Chanteuse', value: 'Chanteur/Chanteuse' },
+          { label: 'Claviériste', value: 'Claviériste' },
+          { label: 'Compositeur/Compositrice', value: 'Compositeur/Compositrice' },
+          { label: 'DJ', value: 'DJ' },
+          { label: 'Flûtiste', value: 'Flûtiste' },
+          { label: 'Guitariste', value: 'Guitariste' },
+          { label: 'Harmoniciste', value: 'Harmoniciste' },
+          { label: 'Ingénieur(e) du son', value: 'Ingénieur(e) du son' },
+          { label: 'Pianiste', value: 'Pianiste' },
+          { label: 'Percussionniste', value: 'Percussionniste' },
+          { label: 'Producteur/Productrice', value: 'Producteur/Productrice' },
+          { label: 'Rappeur/Rappeuse', value: 'Rappeur/Rappeuse' },
+          { label: 'Saxophoniste', value: 'Saxophoniste' },
+          { label: 'Tromboniste', value: 'Tromboniste' },
+          { label: 'Trompettiste', value: 'Trompettiste' },
+          { label: 'Violoncelliste', value: 'Violoncelliste' },
+          { label: 'Violoniste', value: 'Violoniste' }
+        ]}
+        style={{
+          inputIOS: styles.inputIOS,
+          inputAndroid: styles.inputAndroid,
+          iconContainer: styles.iconContainer
+        }}
+        placeholder={{ label: "Aucun métier prédéfini", value: null }}
+      />
+
       <Text style={styles.text}>Genre :</Text>
       <RNPickerSelect
         onValueChange={(value) => setSelectStyle(value)}
         items={[
-          { label: 'Variété', value: 'Variété' },
-          { label: 'Jazz', value: 'Jazz' },
-          { label: 'Rock', value: 'Rock' },
-          { label: 'Pop', value: 'Pop' },
-          { label: 'Classique', value: 'Classique' },
-          { label: 'Rap', value: 'Hip-Hop/Rap' },
-          { label: 'Reggae', value: 'Reggae' },
-          { label: 'Electro', value: 'Electro' },
-          { label: 'Blues', value: 'Blues' },
-          { label: 'Funk', value: 'Funk' },
-          { label: 'Soul', value: 'Soul' },
-          { label: 'Country', value: 'Country' },
-          { label: 'Metal', value: 'Metal' },
-          { label: 'Indie', value: 'Indie' },
-          { label: 'R&B', value: 'R&B' },
-          { label: 'Techno', value: 'Techno' },
-          { label: 'Reggaeton', value: 'Reggaeton' },
-          { label: 'Disco', value: 'Disco' },
-          { label: 'Punk', value: 'Punk' },
-          { label: 'Gospel', value: 'Gospel' },
-          { label: 'Trance', value: 'Trance' },
           { label: 'Alternative', value: 'Alternative' },
-          { label: 'Chill-out', value: 'Chill-out' },
-          { label: 'Ska', value: 'Ska' },
-          { label: 'House', value: 'House' },
           { label: 'Ambient', value: 'Ambient' },
-          { label: 'Trap', value: 'Trap' },
-          { label: 'Hardcore', value: 'Hardcore' },
-          { label: 'Dancehall', value: 'Dancehall' },
           { label: 'Bluegrass', value: 'Bluegrass' },
+          { label: 'Blues', value: 'Blues' },
+          { label: 'Chill-out', value: 'Chill-out' },
+          { label: 'Classique', value: 'Classique' },
+          { label: 'Country', value: 'Country' },
+          { label: 'Dancehall', value: 'Dancehall' },
+          { label: 'Disco', value: 'Disco' },
+          { label: 'Electro', value: 'Electro' },
+          { label: 'Funk', value: 'Funk' },
+          { label: 'Gospel', value: 'Gospel' },
+          { label: 'Hardcore', value: 'Hardcore' },
+          { label: 'Hip-Hop/Rap', value: 'Hip-Hop/Rap' },
+          { label: 'House', value: 'House' },
+          { label: 'Indie', value: 'Indie' },
+          { label: 'Jazz', value: 'Jazz' },
+          { label: 'Metal', value: 'Metal' },
+          { label: 'Pop', value: 'Pop' },
+          { label: 'Posé', value: 'Posé' },
+          { label: 'Punk', value: 'Punk' },
+          { label: 'R&B', value: 'R&B' },
+          { label: 'Reggae', value: 'Reggae' },
+          { label: 'Reggaeton', value: 'Reggaeton' },
+          { label: 'Rock', value: 'Rock' },
+          { label: 'Ska', value: 'Ska' },
+          { label: 'Soul', value: 'Soul' },
+          { label: 'Techno', value: 'Techno' },
+          { label: 'Trance', value: 'Trance' },
+          { label: 'Trap', value: 'Trap' },
+          { label: 'Variété', value: 'Variété' }
         ]}
         style={{
           inputIOS: styles.inputIOS,
@@ -80,39 +114,6 @@ const HomeScreen = () => {
           iconContainer: styles.iconContainer,
         }}
         placeholder={{ label: "Aucun genre pédéfini", value: null }}
-      />
-
-      <Text style={styles.text}>Métier :</Text>
-      <RNPickerSelect
-        onValueChange={(value) => setSelectJob(value)}
-        items={[
-          { label: 'Chanteur/Chanteuse', value: 'Chanteur/Chanteuse' },
-          { label: 'Rappeur/Rappeuse', value: 'Rappeur/Rappeuse' },
-          { label: 'Guitariste', value: 'Guitariste' },
-          { label: 'Bassiste', value: 'Bassiste' },
-          { label: 'Batteur/Batteuse', value: 'Batteur/Batteuse' },
-          { label: 'Claviériste', value: 'Claviériste' },
-          { label: 'Pianiste', value: 'Pianiste' },
-          { label: 'Violoniste', value: 'Violoniste' },
-          { label: 'Violoncelliste', value: 'Violoncelliste' },
-          { label: 'Flûtiste', value: 'Flûtiste' },
-          { label: 'Saxophoniste', value: 'Saxophoniste' },
-          { label: 'Trompettiste', value: 'Trompettiste' },
-          { label: 'Tromboniste', value: 'Tromboniste' },
-          { label: 'Percussionniste', value: 'Percussionniste' },
-          { label: 'Harmoniciste', value: 'Harmoniciste' },
-          { label: 'Compositeur/Compositrice', value: 'Compositeur/Compositrice' },
-          { label: 'Arrangeur/Arrangeuse', value: 'Arrangeur/Arrangeuse' },
-          { label: 'Producteur/Productrice', value: 'Producteur/Productrice' },
-          { label: 'Ingénieur(e) du son', value: 'Ingénieur(e) du son' },
-          { label: 'DJ', value: 'DJ' }
-        ]}
-        style={{
-          inputIOS: styles.inputIOS,
-          inputAndroid: styles.inputAndroid,
-          iconContainer: styles.iconContainer
-        }}
-        placeholder={{ label: "Sélectionner un métier", value: null }}
       />
 
       <View>
@@ -136,11 +137,10 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     paddingLeft: 25,
     marginBottom: 25,
-    color: '#fff',
+    color: 'white',
   },
-  
   text: {
-    color: '#fff',
+    color: 'white',
     marginBottom: 10,
   },
   inputIOS: {

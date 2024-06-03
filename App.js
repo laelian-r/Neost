@@ -4,13 +4,16 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image } from 'react-native';
 import HomeScreen from './app/screens/homeScreen';
-import DetailArtiste from './app/screens/DetailArtists';
+import DetailArtiste from './app/screens/detailArtists';
 import ProfilScreen from './app/screens/ProfilScreen';
 import MessageScreen from './app/screens/MessageScreen';
 import RegisterScreen from './app/screens/register';
 import LoginScreen from './app/screens/login';
+import { supabase } from './hook/UserFetch';
 import * as NavigationBar from 'expo-navigation-bar';
 import { StatusBar } from 'react-native';
+
+console.log(supabase)
 
 const AuthStack = createNativeStackNavigator();
 
@@ -77,7 +80,7 @@ export default function App() {
         <Tab.Navigator
           screenOptions={{
             tabBarStyle: { backgroundColor: '#1e1e1e' },
-            tabBarActiveTintColor: '#fff',
+            tabBarActiveTintColor: 'white',
             tabBarInactiveTintColor: '#777',
             headerShown: false,
           }}
@@ -93,7 +96,7 @@ export default function App() {
                       ? require('./assets/icon-active-home.png')
                       : require('./assets/icon-home.png')
                   }
-                  style={{ width: 30, height: 30 }}
+                  style={{ width: 25, height: 25 }}
                 />
               ),
               tabBarShowLabel: false,
@@ -110,7 +113,7 @@ export default function App() {
                       ? require('./assets/icon-active-messages.png')
                       : require('./assets/icon-messages.png')
                   }
-                  style={{ width: 30, height: 30 }}
+                  style={{ width: 25, height: 25 }}
                 />
               ),
               tabBarShowLabel: false,
@@ -127,7 +130,7 @@ export default function App() {
                       ? require('./assets/icon-active-profile.png')
                       : require('./assets/icon-profile.png')
                   }
-                  style={{ width: 30, height: 30 }}
+                  style={{ width: 25, height: 25 }}
                 />
               ),
               tabBarShowLabel: false,

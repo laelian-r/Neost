@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, Pressable, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, Pressable, TextInput, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import fakeData from '../../fakeData.json';
@@ -111,7 +111,7 @@ const ProfilScreen = () => {
   };
 
   return (
-    <View style={styles.screen}>
+    <ScrollView style={styles.screen}>
       {artist ? (
         <>
           <View>
@@ -133,80 +133,102 @@ const ProfilScreen = () => {
                 autoFocus
               />
             ) : (
-              <View style={styles.textContainer}>
+              <View style={styles.fieldsContainer}>
+                <View style={styles.textContainer}>
+                  <Text style={styles.label}>Nom :</Text>
+                  <Pressable onPress={handleNameChange}>
+                    <Image
+                      style={{ width: 25, height: 25 }}
+                      source={require('../../assets/icon-pen.png')}
+                    />
+                  </Pressable>
+                </View>
                 <Text style={styles.text}>{artist.name}</Text>
-                <Pressable onPress={handleNameChange}>
-                  <Image
-                    style={{ width: 20, height: 20 }}
-                    source={require('../../assets/icon-pen.png')}
-                  />
-                </Pressable>
               </View>
             )}
             {isEditingRole ? (
               <>
+              <Text style={styles.label}>Métier :</Text>
               <RNPickerSelect
                 onValueChange={(value) => setNewRole(value)}
                 items={roles.map(role => ({ label: role, value: role }))}
                 value={newRole}
+                style={{
+                  inputIOS: styles.inputIOS,
+                  inputAndroid: styles.inputAndroid,
+                  iconContainer: styles.iconContainer
+                }}
               />
               <Pressable onPress={submitRole}>
                   <Image
-                    style={{ width: 20, height: 20 }}
+                    style={{ width: 25, height: 25 }}
                     source={require('../../assets/icon-chek.png')}
                   />
                 </Pressable>
               </>
 
             ) : (
-              <View style={styles.textContainer}>
+              <View style={styles.fieldsContainer}>
+                <View style={styles.textContainer}>
+                  <Text style={styles.label}>Métier :</Text>
+                  <Pressable onPress={handleRoleChange}>
+                    <Image
+                      style={{ width: 25, height: 25 }}
+                      source={require('../../assets/icon-pen.png')}
+                    />
+                  </Pressable>
+                </View>
                 <Text style={styles.text}>{artist.role}</Text>
-                <Pressable onPress={handleRoleChange}>
-                  <Image
-                    style={{ width: 20, height: 20 }}
-                    source={require('../../assets/icon-pen.png')}
-                  />
-                </Pressable>
               </View>
             )}
             {isEditingGenre ? (
               <>
-              
+              <Text style={styles.label}>Genre :</Text>
               <RNPickerSelect
                 onValueChange={(value) => setNewGenre(value)}
                 items={genres.map(genre => ({ label: genre, value: genre }))}
                 value={newGenre}
+                style={{
+                  inputIOS: styles.inputIOS,
+                  inputAndroid: styles.inputAndroid,
+                  iconContainer: styles.iconContainer
+                }}
               />
 
               <Pressable onPress={submitGenre}>
                   <Image
-                    style={{ width: 20, height: 20 }}
+                    style={{ width: 25, height: 25 }}
                     source={require('../../assets/icon-chek.png')}
                   />
                 </Pressable>
               </>
 
             ) : (
-              <View style={styles.textContainer}>
+              <View style={styles.fieldsContainer}>
+                <View style={styles.textContainer}>
+                  <Text style={styles.label}>Genre :</Text>
+                  <Pressable onPress={handleGenreChange}>
+                    <Image
+                      style={{ width: 25, height: 25 }}
+                      source={require('../../assets/icon-pen.png')}
+                    />
+                  </Pressable>
+                </View>
                 <Text style={styles.text}>{artist.genre}</Text>
-                <Pressable onPress={handleGenreChange}>
-                  <Image
-                    style={{ width: 20, height: 20 }}
-                    source={require('../../assets/icon-pen.png')}
-                  />
-                </Pressable>
               </View>
             )}
-          </View>
-          <Text style={styles.text}>Followers :</Text>
-          <Text style={styles.text}>{artist.followers}</Text>
 
-          <Text style={styles.text}>Suivie :</Text>
-          <Text style={styles.text}>{artist.suivie}</Text>
-
-          <Text style={styles.text}>Description :</Text>
-
-          {isEditingDescription ? (
+          <View style={styles.fieldsContainer}>
+            <View style={styles.textContainer}>
+              <Text style={styles.label}>Description :</Text>
+              <Pressable onPress={handleDescriptionChange}>
+                <Image
+                  style={{ width: 25, height: 25 }}
+                  source={require('../../assets/icon-pen.png')}
+                />
+              </Pressable>
+            </View>
+            {isEditingDescription ? (
               <TextInput
                 style={styles.input}
                 value={newDescription}
@@ -215,21 +237,30 @@ const ProfilScreen = () => {
                 autoFocus
               />
             ) : (
-              <View style={styles.textContainer}>
+
+              <View style={styles.fieldsContainer}>
+                
                 <Text style={styles.text}>{artist.description}</Text>
-                <Pressable onPress={handleDescriptionChange}>
-                  <Image
-                    style={{ width: 20, height: 20 }}
-                    source={require('../../assets/icon-pen.png')}
-                  />
-                </Pressable>
               </View>
             )}
+          </View>
+
+          <View style={styles.fieldsContainer}>
+            <Text style={styles.label}>Followers :</Text>
+            <Text style={styles.text}>{artist.followers}</Text>
+          </View>
+
+          <View style={styles.fieldsContainer}>
+            <Text style={styles.label}>Suivie :</Text>
+            <Text style={styles.text}>{artist.suivie}</Text>
+          </View>
+          
+          </View>
         </>
       ) : (
         <Text style={styles.text}>Artiste non trouvé</Text>
       )}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -237,27 +268,63 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: '#1e1e1e',
-    padding: hp('5%'),
+    paddingTop: hp('3%'),
+    paddingRight: hp('5%'),
+    paddingBottom: hp('3%'),
+    paddingLeft: hp('5%'),
   },
   textContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 10
+    marginBottom: 3
+  },
+  fieldsContainer: {
+    marginBottom: 20
+  },
+  label: {
+    fontSize: 20,
+    color: 'white'
   },
   text: {
-    color: '#fff',
+    fontSize: 17,
+    color: 'gray',
   },
   input: {
-    color: '#fff',
+    color: 'white',
     borderBottomWidth: 1,
-    borderBottomColor: '#fff',
+    borderBottomColor: 'white',
   },
   image: {
     borderRadius: 15,
     height: 300,
-    width: wp('80%')
-},
+    width: wp('80%'),
+    marginBottom: 15
+  },
+  inputIOS: {
+    fontSize: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderRadius: 100,
+    color: 'white',
+    paddingRight: 30,
+    backgroundColor: '#333',
+    marginBottom: 20
+  },
+  inputAndroid: {
+    fontSize: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderRadius: 100,
+    color: 'white',
+    paddingRight: 30,
+    backgroundColor: '#333',
+    marginBottom: 20
+  },
+  iconContainer: {
+    top: 10,
+    right: 12,
+  }
 });
 
 export default ProfilScreen;

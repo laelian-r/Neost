@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 
   },
   text: {
-      color: '#fff',
+      color: 'white',
   },
 });
 export default MessageScreen;
