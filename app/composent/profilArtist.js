@@ -3,6 +3,7 @@ import { View, Text, Image, ImageBackground, StyleSheet, Button, Pressable } fro
 import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { loginId } from '../screens/login';
+import DetailArtiste from '../screens/DetailArtists';
 
 const ArtistProfile = ({ artistData }) => {
     const navigation = useNavigation();
@@ -15,13 +16,16 @@ const ArtistProfile = ({ artistData }) => {
     }, [artistData]);
 
     const reduceDescription = (description, limit) => {
-        const words = description.split(' '); 
-        if (words.length > limit) {
-            return words.slice(0, limit).join(' ') + '...'; 
-        } else {
-            return description;
+        if(description !== undefined){
+            const words = description.split(' '); 
+            if (words.length > limit) {
+                return words.slice(0, limit).join(' ') + '...'; 
+            } else {
+                return description;
+            }
         }
-    };
+        }   
+
 
     const navigateToProfile = () => {
         navigation.navigate('DetailArtiste', { artistData: artistData });

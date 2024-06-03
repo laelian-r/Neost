@@ -44,7 +44,14 @@ const ProfilScreen = () => {
     'Gospel', 'Trance', 'Alternative', 'Chill-out', 'Ska', 'House', 'Ambient', 'Trap', 'Hardcore',
     'Dancehall', 'Bluegrass'
   ];
-  const roles = ["Chanteur", "Chanteuse", "Rappeur", "Rappeuse", "Guitariste", "Bassiste", "Batteur", "Batteuse", "Claviériste", "Pianiste", "Violoniste", "Violoncelliste", "Flûtiste", "Saxophoniste", "Trompettiste", "Tromboniste", "Percussionniste", "Harmoniciste", "Compositeur", "Compositrice", "Arrangeur", "Arrangeuse", "Producteur", "Productrice", "Ingénieur du son", "Ingénieure du son", "DJ"];
+  const roles = [
+    "Chanteur/Chanteuse", "Rappeur/Rappeuse", "Guitariste", "Bassiste", 
+    "Batteur/Batteuse", "Claviériste", "Pianiste", "Violoniste", 
+    "Violoncelliste", "Flûtiste", "Saxophoniste", "Trompettiste", 
+    "Tromboniste", "Percussionniste", "Harmoniciste", 
+    "Compositeur/Compositrice", "Arrangeur/Arrangeuse", 
+    "Producteur/Productrice", "Ingénieur(e) du son", "DJ"
+  ];;
 
 
   const handleNameChange = () => {
@@ -108,10 +115,15 @@ const ProfilScreen = () => {
       {artist ? (
         <>
           <View>
-            <Image
-              style={{ width: 100, height: 100 }}
-              source={{ uri: artist.imageUrl }}
+          {artist.imageUrl ? (<Image
+                style={styles.image}
+                source={{uri : artist.imageUrl}}
+            />):(   
+                <Image
+                style={styles.image}
+                source={{ uri: 'https://www.logiquetechno.com/wp-content/uploads/2020/11/retirer-photo-de-profil-facebook.png' }}
             />
+            )}
             {isEditingName ? (
               <TextInput
                 style={styles.input}
@@ -241,6 +253,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#fff',
   },
+  image: {
+    borderRadius: 15,
+    height: 300,
+    width: wp('80%')
+},
 });
 
 export default ProfilScreen;
