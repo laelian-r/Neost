@@ -31,28 +31,23 @@ const ProfilScreen = () => {
 
     useEffect(() => {
       const fetchData = async () => {
-        console.log(loginId, loginIdR)
         if (loginId || loginIdR) {
           if(loginId){
             id = loginId
           }
           else{
             id = loginIdR
-            console.log(id)
           }
           try {
             const response = await fetch(`${id}`);
             const data = await response.json();
-            console.log(data);
             setArtist(data);
             setIsLoading(false);
   
-            if (data) {
               setNewName(data.name);
               setNewRole(data.job);
               setNewGenre(data.genre);
               setNewDescription(data.description);
-            }
           } catch (error) {
             setError(error);
           }
@@ -80,10 +75,9 @@ const ProfilScreen = () => {
   };
 
   const handleNameSubmit = async () => {
-    if (artist) {
+    if (newName) {
       const updatedName = newName.trim();
       const updatedArtist = { ...artist, name: updatedName };
-      console.log(artist.email)
       try {
         const response = await fetch(`${id}`, {
           method: 'PATCH',
@@ -115,11 +109,14 @@ const ProfilScreen = () => {
         setError('Error updating name');
       }
     }
+    else{
+      setIsEditingName(false)
+    }
   };
 
 
   const submitRole = async ()=>{
-    if (artist) {
+    if (newRole) {
       const updatedRole = newRole.trim();
       const updatedArtist = { ...artist, role: updatedRole };
       try {
@@ -153,10 +150,13 @@ const ProfilScreen = () => {
         setError('Error updating name');
       }
     }
+    else{
+      setIsEditingRole(false)
+    }
   };
 
   const submitGenre = async ()=>{
-    if (artist) {
+    if (newGenre) {
       const updatedGenre = newGenre.trim();
       const updatedArtist = { ...artist, genre: updatedGenre };
       try {
@@ -190,10 +190,13 @@ const ProfilScreen = () => {
         setError('Error updating name');
       }
     }
+    else{
+      setIsEditingGenre(false)
+    }
   }
 
   const handleDescriptionSubmit = async () => {
-    if (artist) {
+    if (newDescription) {
       const updatedDescritpion = newDescription.trim();
       const updatedArtist = { ...artist, description: updatedDescritpion };
       try {
@@ -226,6 +229,9 @@ const ProfilScreen = () => {
         console.error('Error:', error);
         setError('Error updating name');
       }
+    }
+    else{
+      setIsEditingDescription(false)
     }
   };
 

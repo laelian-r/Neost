@@ -74,7 +74,7 @@ const HomeScreen = () => {
 
       <View>
         {isLoadingArtists ? (
-          <Text style={styles.errText}>Erreur, un problème est survenue! la page ne parvient pas à charger... Veuyez relancer l'application!</Text>
+          <Text style={styles.errText}>chargement...</Text>
         ):(
           dataArtist.map((artist) => (
             <ArtistProfile key={artist.id} artistData={artist} />
