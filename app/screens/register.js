@@ -57,7 +57,7 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
         password:toString(password),
         imageUrl:"",
         name:name,
-        role:SelectJob,
+        job:SelectJob,
         description:description,
         followers:0,
         suivie:0,

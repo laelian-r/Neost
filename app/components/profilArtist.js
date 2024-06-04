@@ -49,7 +49,7 @@ const ArtistProfile = ({ artistData }) => {
             </View>
             <View style={styles.restContainer}>
                 <Text style={styles.name}>{artistInfo.name}</Text>
-                <Text style={styles.role}>{artistInfo.role}</Text>
+                <Text style={styles.role}>{artistInfo.job}</Text>
                 <Text style={styles.description}>{reduceDescription(artistInfo.description, 10)}</Text>
                 <Pressable onPress={navigateToProfile} style={styles.button}>
                     <Text style={styles.buttonText}>Voir plus</Text>

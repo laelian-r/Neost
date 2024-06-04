@@ -24,30 +24,30 @@ const ProfilScreen = () => {
   const [newGenre, setNewGenre] = useState('');
   const [newDescription, setNewDescription] = useState('');
 
-
-  useEffect( async () => {
-    if (loginId) {
+    useEffect(() => {
       const fetchData = async () => {
-        try {
+        if (loginId) {
+          try {
             const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:LdyDs-wu/user/${loginId}`);
             const data = await response.json();
-            console.log(data)
+            console.log(data);
             setArtist(data);
             setIsLoading(false);
-        } catch (error) {
-            setError(error)
+  
+            if (data) {
+              setNewName(data.name);
+              setNewRole(data.job);
+              setNewGenre(data.genre);
+              setNewDescription(data.description);
+            }
+          } catch (error) {
+            setError(error);
+          }
         }
-    };
-    fetchData()
-
-      if (artist) {
-        setNewName(artist.name);
-        setNewRole(artist.role);
-        setNewGenre(artist.genre);
-        setNewDescription(artist.description)
-      }
-    }
-  }, [artist]);
+      };
+  
+      fetchData();
+    }, [loginId]);
 
   const genres = [
     'Rap', 'Variété', 'Jazz', 'Rock', 'Pop', 'Classique', 'Hip-Hop', 'Reggae', 'Electro', 'Blues',
@@ -189,7 +189,7 @@ const ProfilScreen = () => {
                     />
                   </Pressable>
                 </View>
-                <Text style={styles.text}>{artist.role}</Text>
+                <Text style={styles.text}>{artist.job}</Text>
               </View>
             )}
             {isEditingGenre ? (

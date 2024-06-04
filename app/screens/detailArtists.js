@@ -39,7 +39,7 @@ const DetailArtiste = ({ route }) => {
         source={{ uri: artistData.backgroundImage }}
       />
       <Text style={styles.name}>{artistData.name}</Text>
-      <Text style={styles.role}>{artistData.role}</Text>
+      <Text style={styles.role}>{artistData.job}</Text>
       <Text style={styles.description}>{artistData.description}</Text>
       <Text style={styles.role}>followers : {newFollowers} </Text>
       <Text style={styles.role}>suivie : {artistData.suivie} </Text>

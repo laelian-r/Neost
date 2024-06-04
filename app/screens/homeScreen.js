@@ -16,11 +16,11 @@ const HomeScreen = () => {
 
   useEffect(() => {
     const filteredArtists = fakeData.filter(artist => {
-      const jobMatch = selectJob ? artist.role === selectJob : true;
+      const jobMatch = selectJob ? artist.job === selectJob : true;
       const styleMatch = selectStyle ? artist.genre === selectStyle : true;
       const searchMatch = searchText ? 
         artist.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        artist.role.toLowerCase().includes(searchText.toLowerCase()) ||
+        artist.job.toLowerCase().includes(searchText.toLowerCase()) ||
         (artist.genre && artist.genre.toLowerCase().includes(searchText.toLowerCase()))
         : true;
       return jobMatch && styleMatch && searchMatch;
