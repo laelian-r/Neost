@@ -74,7 +74,7 @@ const HomeScreen = () => {
 
       <View>
         {isLoadingArtists ? (
-          <Text>en chargement</Text>
+          <Text style={styles.errText}>Erreur, un problème est survenue! la page ne parvient pas à charger... Veuyez relancer l'application!</Text>
         ):(
           dataArtist.map((artist) => (
             <ArtistProfile key={artist.id} artistData={artist} />
@@ -91,6 +91,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#1e1e1e',
     padding: hp('5%'),
+  },
+  errText: {
+    color: 'white',
+    textAlign: 'center',
+    margin: 50
   },
   search: {
     height: 50,

@@ -32,7 +32,7 @@ const ProfilScreen = () => {
       const fetchData = async () => {
         if (loginId || loginIdR) {
           try {
-            const response = await fetch(`userID${loginId || loginIdR}`);
+            const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/user/{user_id}${loginId || loginIdR}`);
             const data = await response.json();
             console.log(data);
             setArtist(data);
@@ -76,7 +76,7 @@ const ProfilScreen = () => {
       const updatedArtist = { ...artist, name: updatedName };
       console.log(artist.email)
       try {
-        const response = await fetch(`userID${loginId}`, {
+        const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/user/{user_id}${loginId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ const ProfilScreen = () => {
       const updatedRole = newRole.trim();
       const updatedArtist = { ...artist, role: updatedRole };
       try {
-        const response = await fetch(`userId${loginId}`, {
+        const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/user/{user_id}${loginId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -151,7 +151,7 @@ const ProfilScreen = () => {
       const updatedGenre = newGenre.trim();
       const updatedArtist = { ...artist, genre: updatedGenre };
       try {
-        const response = await fetch(`userID${loginId}`, {
+        const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/user/{user_id}${loginId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -188,7 +188,7 @@ const ProfilScreen = () => {
       const updatedDescritpion = newDescription.trim();
       const updatedArtist = { ...artist, description: updatedDescritpion };
       try {
-        const response = await fetch(`userID${loginId}`, {
+        const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/user/{user_id}${loginId}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',

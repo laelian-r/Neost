@@ -60,7 +60,7 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
   const handleRegister = async () => {
     if(email && password && name && SelectJob && description){
       try {
-        const response = await fetch(`signup`, {
+        const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/auth/signup`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
