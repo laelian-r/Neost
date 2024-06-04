@@ -14,6 +14,7 @@ import genre from '../../genre.json'
 
 
 const ProfilScreen = () => {
+  let id;
   const navigation = useNavigation();
   const [artists, isLoading] = userFetch();
   const [artist, setArtist] = useState(null);
@@ -30,9 +31,17 @@ const ProfilScreen = () => {
 
     useEffect(() => {
       const fetchData = async () => {
+        console.log(loginId, loginIdR)
         if (loginId || loginIdR) {
+          if(loginId){
+            id = loginId
+          }
+          else{
+            id = loginIdR
+            console.log(id)
+          }
           try {
-            const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/user/{user_id}${loginId || loginIdR}`);
+            const response = await fetch(`${id}`);
             const data = await response.json();
             console.log(data);
             setArtist(data);
@@ -76,13 +85,13 @@ const ProfilScreen = () => {
       const updatedArtist = { ...artist, name: updatedName };
       console.log(artist.email)
       try {
-        const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/user/{user_id}${loginId}`, {
+        const response = await fetch(`${id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            user_id: loginId,
+            user_id: id,
             name: updatedName,
             email: artist.email,
             job: artist.job,
@@ -114,13 +123,13 @@ const ProfilScreen = () => {
       const updatedRole = newRole.trim();
       const updatedArtist = { ...artist, role: updatedRole };
       try {
-        const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/user/{user_id}${loginId}`, {
+        const response = await fetch(`${id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            user_id: loginId,
+            user_id: id,
             name: artist.name,
             email: artist.email,
             job: updatedRole,
@@ -151,13 +160,13 @@ const ProfilScreen = () => {
       const updatedGenre = newGenre.trim();
       const updatedArtist = { ...artist, genre: updatedGenre };
       try {
-        const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/user/{user_id}${loginId}`, {
+        const response = await fetch(`${id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            user_id: loginId,
+            user_id: id,
             name: artist.name,
             email: artist.email,
             job: artist.job,
@@ -188,13 +197,13 @@ const ProfilScreen = () => {
       const updatedDescritpion = newDescription.trim();
       const updatedArtist = { ...artist, description: updatedDescritpion };
       try {
-        const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/user/{user_id}${loginId}`, {
+        const response = await fetch(`${id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            user_id: loginId,
+            user_id: id,
             name: artist.name,
             email: artist.email,
             job: artist.job,

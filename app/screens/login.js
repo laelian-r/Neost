@@ -39,7 +39,7 @@ const LoginScreen = ({ onLoginSuccess }) => {
   const handleLogin = async () => {
     if (email && password) {
              if(artists){
-              const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/auth/login', {
+              const response = await fetch('', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ const LoginScreen = ({ onLoginSuccess }) => {
         const data = await response.json();
             console.log(data)
         if (response.ok) {
-          const userResponse = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/auth/me', {
+          const userResponse = await fetch('', {
               headers: {
                   'Authorization': `Bearer ${data.authToken}`
               },

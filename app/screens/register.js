@@ -10,6 +10,7 @@ const goToLoginScreen = (navigation) => {
   navigation.navigate('Login');
 };
 
+let loginIdR;
 
 const RegisterScreen = ({ onRegisterSuccess }) => {
   const navigation = useNavigation();
@@ -60,7 +61,7 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
   const handleRegister = async () => {
     if(email && password && name && SelectJob && description){
       try {
-        const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/auth/signup`, {
+        const response = await fetch(``, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -76,17 +77,18 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
           }),
         });
         const data = await response.json();
-        console.log(data)
     if (response.ok) {
-      const userResponse = await fetch('me', {
+      const userResponse = await fetch('', {
           headers: {
               'Authorization': `Bearer ${data.authToken}`
           },
       });
 
       const userData = await userResponse.json();
+      console.log(userData, userData.id)
       if (userResponse.ok) {
-        loginId = userData.id
+        loginIdR = userData.id
+        console.log(loginIdR)
           onRegisterSuccess()
         }} else {
           const errorData = await response.json();
@@ -312,5 +314,5 @@ const styles = StyleSheet.create({
     color:'red'
   }
 });
-
+export {loginIdR}
 export default RegisterScreen;
