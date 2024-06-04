@@ -1,22 +1,25 @@
-import{ createClient } from '@supabase/supabase-js'   
+import { useState, useEffect } from 'react';
 
-const supabaseUrl = '' 
-const supabaseKey = ''
-export const supabase = createClient ( supabaseUrl , supabaseKey )
 
-async function getUsers() {
-    const response = await supabase
-      .from('User')
-      .select('name');
-  
-    const data = response.data;
-    const error = response.error;
-  
-    if (error) {
-      console.error('Erreur lors de la récupération des utilisateurs:', data);
-    } else {
-      console.log('Utilisateurs:', data);
-    }
-  }
-  
-  getUsers();
+export function userFetch(){
+    const [isLoading, setIsLoading] = useState(true);
+    const [user, setUser] = useState([]);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:LdyDs-wu/user');
+                const data = await response.json();
+
+                setUser(data);
+                setIsLoading(false);
+            } catch (error) {
+                setError(error)
+            }
+        };
+        
+        fetchData();
+    }, []);
+    return [user, isLoading, error]
+}

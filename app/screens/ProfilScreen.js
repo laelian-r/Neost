@@ -6,15 +6,18 @@ import fakeData from '../../fakeData.json';
 import { loginId } from './login';
 import RNPickerSelect from 'react-native-picker-select';
 import Divider from '../components/Drivers';
+import { userFetch } from '../../hook/UserFetch';
 
 const ProfilScreen = () => {
   const navigation = useNavigation();
-  const [artists, setArtists] = useState([]);
+  const [artists, isLoading] = userFetch();
   const [artist, setArtist] = useState(null);
   const [isEditingName, setIsEditingName] = useState(false);
   const [isEditingRole, setIsEditingRole] = useState(false);
   const [isEditingGenre, setIsEditingGenre] = useState(false);
   const [isEditingDescription, setIsEditingDescription] = useState(false);
+  const [error, setError] = useState(null);
+
 
   const [newName, setNewName] = useState('');
   const [newRole, setNewRole] = useState('');
@@ -22,22 +25,29 @@ const ProfilScreen = () => {
   const [newDescription, setNewDescription] = useState('');
 
 
-  useEffect(() => {
-    setArtists(fakeData);
-  }, []);
+  useEffect( async () => {
+    if (loginId) {
+      const fetchData = async () => {
+        try {
+            const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:LdyDs-wu/user/${loginId}`);
+            const data = await response.json();
+            console.log(data)
+            setArtist(data);
+            setIsLoading(false);
+        } catch (error) {
+            setError(error)
+        }
+    };
+    fetchData()
 
-  useEffect(() => {
-    if (artists.length > 0) {
-      const foundArtist = artists.find(artist => artist.id === loginId);
-      setArtist(foundArtist);
-      if (foundArtist) {
-        setNewName(foundArtist.name);
-        setNewRole(foundArtist.role);
-        setNewGenre(foundArtist.genre);
-        setNewDescription(foundArtist.description)
+      if (artist) {
+        setNewName(artist.name);
+        setNewRole(artist.role);
+        setNewGenre(artist.genre);
+        setNewDescription(artist.description)
       }
     }
-  }, [artists]);
+  }, [artist]);
 
   const genres = [
     'Rap', 'Variété', 'Jazz', 'Rock', 'Pop', 'Classique', 'Hip-Hop', 'Reggae', 'Electro', 'Blues',
@@ -71,45 +81,45 @@ const ProfilScreen = () => {
     setIsEditingDescription(true);
   };
 
-  const handleNameSubmit = () => {
-    if (artist) {
-      const updatedName = newName.trim();
-      const updatedArtist = { ...artist, name: updatedName };
-      setArtist(updatedArtist);
-      setIsEditingName(false);
-    }
-  };
+  // const handleNameSubmit = () => {
+  //   if (artist) {
+  //     const updatedName = newName.trim();
+  //     const updatedArtist = { ...artist, name: updatedName };
+  //     setArtist(updatedArtist);
+  //     setIsEditingName(false);
+  //   }
+  // };
 
 
-  const submitRole = ()=>{
-    if (artist) {
-      const updatedRole = newRole.trim();
-      const updatedArtist = { ...artist, role: updatedRole };
-      setArtist(updatedArtist);
-      setIsEditingRole(false);
-      setNewRole(updatedRole);
-    }
-  }
+  // const submitRole = ()=>{
+  //   if (artist) {
+  //     const updatedRole = newRole.trim();
+  //     const updatedArtist = { ...artist, role: updatedRole };
+  //     setArtist(updatedArtist);
+  //     setIsEditingRole(false);
+  //     setNewRole(updatedRole);
+  //   }
+  // }
 
-  const submitGenre = ()=>{
-    if (artist) {
-      const updatedGenre = newGenre.trim();
-      const updatedArtist = { ...artist, genre: updatedGenre };
-      setArtist(updatedArtist);
-      setIsEditingGenre(false);
-      setNewGenre(updatedGenre);
-    }
-  }
+  // const submitGenre = ()=>{
+  //   if (artist) {
+  //     const updatedGenre = newGenre.trim();
+  //     const updatedArtist = { ...artist, genre: updatedGenre };
+  //     setArtist(updatedArtist);
+  //     setIsEditingGenre(false);
+  //     setNewGenre(updatedGenre);
+  //   }
+  // }
 
-  const handleDescriptionSubmit = () => {
-    if (artist) {
-      const updatedDescription = newDescription.trim();
-      const updatedArtist = { ...artist, description: updatedDescription };
-      setArtist(updatedArtist);
-      setIsEditingDescription(false);
-      setNewDescription(updatedDescription)
-    }
-  };
+  // const handleDescriptionSubmit = () => {
+  //   if (artist) {
+  //     const updatedDescription = newDescription.trim();
+  //     const updatedArtist = { ...artist, description: updatedDescription };
+  //     setArtist(updatedArtist);
+  //     setIsEditingDescription(false);
+  //     setNewDescription(updatedDescription)
+  //   }
+  // };
 
   return (
     <ScrollView style={styles.screen}>

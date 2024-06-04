@@ -4,6 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 import fakeData from '../../fakeData.json'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { userFetch } from '../../hook/UserFetch';
+
 
 
 const goToRegisterScreen = (navigation) => {
@@ -14,11 +16,12 @@ let loginId;
 
 
 
+
 const LoginScreen = ({ onLoginSuccess }) => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [artists, setArtists] = useState([]);
+  const [artists, isLoading] = userFetch()
   const [erreur, setErreur] = useState(false);
 
   const changeTextEmail = (e)=>{
@@ -31,10 +34,6 @@ const LoginScreen = ({ onLoginSuccess }) => {
     setErreur(false)
   }
 
-  useEffect(() => {
-    setArtists(fakeData);
-  }, []);
-
   const storeData = async (value) => {
     try {
       await AsyncStorage.setItem('id', value)
@@ -45,23 +44,52 @@ const LoginScreen = ({ onLoginSuccess }) => {
   }
 
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (email && password) {
-        artists.map((artist) => {
-             if(artist.email === email && artist.password ===password){
-                  loginId = artist.id
-                
-                onLoginSuccess()
+             if(artists){
+              const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:LdyDs-wu/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                }),
+            });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          localStorage.setItem('token', data.authToken);
+          const userResponse = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:LdyDs-wu/auth/me', {
+              headers: {
+                  'Authorization': `Bearer ${data.authToken}`
+              },
+          });
+  
+          const userData = await userResponse.json();
+
+          if (userResponse.ok) {
+            loginId = userData.id
+
+            onLoginSuccess()
+
+
+          } else {
+              console.error(userData);
+          }
+
              }
              else {
               setErreur(true)
             }
-        })
-    } else {
+          }
+        }
+     else {
       setErreur(true)
     }
-  };
-
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Connexion</Text>

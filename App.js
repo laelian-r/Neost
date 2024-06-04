@@ -9,11 +9,10 @@ import ProfilScreen from './app/screens/ProfilScreen';
 import MessageScreen from './app/screens/MessageScreen';
 import RegisterScreen from './app/screens/register';
 import LoginScreen from './app/screens/login';
-import { supabase } from './hook/UserFetch';
 import * as NavigationBar from 'expo-navigation-bar';
 import { StatusBar } from 'react-native';
 
-console.log(supabase)
+
 
 const AuthStack = createNativeStackNavigator();
 

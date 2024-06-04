@@ -4,16 +4,15 @@ import RNPickerSelect from 'react-native-picker-select';
 import ArtistProfile from '../components/profilArtist';
 import fakeData from '../../fakeData.json';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { userFetch } from '../../hook/UserFetch';
+
 
 const HomeScreen = () => {
   const [searchText, setSearchText] = useState('');
   const [selectJob, setSelectJob] = useState('');
   const [selectStyle, setSelectStyle] = useState('');
-  const [artists, setArtists] = useState([]);
+  const [artists, isLoading] = userFetch()
 
-  useEffect(() => {
-    setArtists(fakeData);
-  }, []);
 
   useEffect(() => {
     const filteredArtists = fakeData.filter(artist => {
@@ -26,7 +25,7 @@ const HomeScreen = () => {
         : true;
       return jobMatch && styleMatch && searchMatch;
     });
-    setArtists(filteredArtists);
+    // setArtists(filteredArtists);
   }, [selectJob, selectStyle, searchText]);
 
   return (
@@ -117,8 +116,8 @@ const HomeScreen = () => {
       />
 
       <View>
-        {artists.map((artist, index) => (
-          <ArtistProfile key={index} artistData={artist} />
+        {artists.map((artist) => (
+          <ArtistProfile key={artist.id} artistData={artist} />
         ))}
       </View>
     </ScrollView>
