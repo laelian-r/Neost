@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 
 const DetailArtiste = ({ route }) => {
@@ -25,9 +26,9 @@ const DetailArtiste = ({ route }) => {
     
   return (
     <View style={styles.container}>
-      {artistData.imageUrl ? (<Image
+      {artistData.image ? (<Image
                 style={styles.image}
-                source={{uri : artistData.imageUrl}}
+                source={{uri : artistData.image}}
             />):(
                 <Image
                 style={styles.image}
@@ -41,11 +42,9 @@ const DetailArtiste = ({ route }) => {
       <Text style={styles.name}>{artistData.name}</Text>
       <Text style={styles.role}>{artistData.job}</Text>
       <Text style={styles.description}>{artistData.description}</Text>
-      <Text style={styles.role}>followers : {newFollowers} </Text>
-      <Text style={styles.role}>suivie : {artistData.suivie} </Text>
       
       <Pressable onPress={toggleFollow} style={styles.button}>
-        <Text style={styles.buttonText}>{isFollowing ? 'Ne plus suivre' : 'Suivre'}</Text>
+        <Text style={styles.subscribe}>{isFollowing ? 'Ne plus suivre' : `S\'abonner à ${artistData.name}`}</Text>
       </Pressable>
     </View>
   );
@@ -74,21 +73,29 @@ const styles = StyleSheet.create({
       color: '#b2b9c1',
       fontSize: 25,
       fontWeight: 'bold',
-      marginTop: 5,
-      textAlign: 'start',
+      marginTop: 5
   },
   role: {
       fontSize: 15,
       color: '#b2b9c1',
       marginTop: 2,
-      textAlign: 'start',
-      fontWeight: 'bold',
+      fontWeight: 'bold'
   },
   description: {
       fontSize: 14,
       marginTop: 2,
-      textAlign: 'start',
+      textAlign: 'center',
       color: 'gray'
+  },
+  subscribe: {
+    color: 'white',
+    borderWidth: 1,
+    borderColor: 'white',
+    textAlign: 'center',
+    padding: 13,
+    width: wp('50%'),
+    borderRadius: 100,
+    margin: 25
   }
 });
 

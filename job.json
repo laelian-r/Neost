@@ -1,0 +1,25 @@
+{
+    "jobs": [
+      { "label": "Arrangeur/Arrangeuse", "value": "Arrangeur/Arrangeuse" },
+      { "label": "Bassiste", "value": "Bassiste" },
+      { "label": "Batteur/Batteuse", "value": "Batteur/Batteuse" },
+      { "label": "Chanteur/Chanteuse", "value": "Chanteur/Chanteuse" },
+      { "label": "Claviériste", "value": "Claviériste" },
+      { "label": "Compositeur/Compositrice", "value": "Compositeur/Compositrice" },
+      { "label": "DJ", "value": "DJ" },
+      { "label": "Flûtiste", "value": "Flûtiste" },
+      { "label": "Guitariste", "value": "Guitariste" },
+      { "label": "Harmoniciste", "value": "Harmoniciste" },
+      { "label": "Ingénieur(e) du son", "value": "Ingénieur(e) du son" },
+      { "label": "Pianiste", "value": "Pianiste" },
+      { "label": "Percussionniste", "value": "Percussionniste" },
+      { "label": "Producteur/Productrice", "value": "Producteur/Productrice" },
+      { "label": "Rappeur/Rappeuse", "value": "Rappeur/Rappeuse" },
+      { "label": "Saxophoniste", "value": "Saxophoniste" },
+      { "label": "Tromboniste", "value": "Tromboniste" },
+      { "label": "Trompettiste", "value": "Trompettiste" },
+      { "label": "Violoncelliste", "value": "Violoncelliste" },
+      { "label": "Violoniste", "value": "Violoniste" }
+    ]
+  }
+  

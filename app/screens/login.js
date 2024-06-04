@@ -34,20 +34,12 @@ const LoginScreen = ({ onLoginSuccess }) => {
     setErreur(false)
   }
 
-  const storeData = async (value) => {
-    try {
-      await AsyncStorage.setItem('id', value)
-      console.log(value)
-    } catch (e) {
-      console.log(e)
-    }
-  }
 
 
   const handleLogin = async () => {
     if (email && password) {
              if(artists){
-              const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:LdyDs-wu/auth/login', {
+              const response = await fetch('login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -59,10 +51,9 @@ const LoginScreen = ({ onLoginSuccess }) => {
             });
 
         const data = await response.json();
-
+            console.log(data)
         if (response.ok) {
-          localStorage.setItem('token', data.authToken);
-          const userResponse = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:LdyDs-wu/auth/me', {
+          const userResponse = await fetch('Aut/me', {
               headers: {
                   'Authorization': `Bearer ${data.authToken}`
               },
@@ -77,7 +68,7 @@ const LoginScreen = ({ onLoginSuccess }) => {
 
 
           } else {
-              console.error(userData);
+            alert('marche pas')
           }
 
              }

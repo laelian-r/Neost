@@ -37,9 +37,9 @@ const ArtistProfile = ({ artistData }) => {
     return (
         <View style={styles.container} blurRadius={5}>
             <View style={styles.imageContainer}>
-            {artistInfo.imageUrl ? (<Image
+            {artistInfo.image ? (<Image
                 style={styles.image}
-                source={{uri : artistInfo.imageUrl}}
+                source={{uri : artistInfo.image}}
             />):(   
                 <Image
                 style={styles.image}

@@ -4,9 +4,14 @@ import { useNavigation } from '@react-navigation/native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import fakeData from '../../fakeData.json';
 import { loginId } from './login';
+import { loginIdR } from './register'
 import RNPickerSelect from 'react-native-picker-select';
 import Divider from '../components/Drivers';
 import { userFetch } from '../../hook/UserFetch';
+import job from '../../job.json'
+import genre from '../../genre.json'
+
+
 
 const ProfilScreen = () => {
   const navigation = useNavigation();
@@ -18,7 +23,6 @@ const ProfilScreen = () => {
   const [isEditingDescription, setIsEditingDescription] = useState(false);
   const [error, setError] = useState(null);
 
-
   const [newName, setNewName] = useState('');
   const [newRole, setNewRole] = useState('');
   const [newGenre, setNewGenre] = useState('');
@@ -26,9 +30,9 @@ const ProfilScreen = () => {
 
     useEffect(() => {
       const fetchData = async () => {
-        if (loginId) {
+        if (loginId || loginIdR) {
           try {
-            const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:LdyDs-wu/user/${loginId}`);
+            const response = await fetch(`userID${loginId || loginIdR}`);
             const data = await response.json();
             console.log(data);
             setArtist(data);
@@ -49,21 +53,6 @@ const ProfilScreen = () => {
       fetchData();
     }, [loginId]);
 
-  const genres = [
-    'Rap', 'Variété', 'Jazz', 'Rock', 'Pop', 'Classique', 'Hip-Hop', 'Reggae', 'Electro', 'Blues',
-    'Funk', 'Soul', 'Country', 'Metal', 'Indie', 'R&B', 'Techno', 'Reggaeton', 'Disco', 'Punk',
-    'Gospel', 'Trance', 'Alternative', 'Chill-out', 'Ska', 'House', 'Ambient', 'Trap', 'Hardcore',
-    'Dancehall', 'Bluegrass'
-  ];
-  const roles = [
-    "Chanteur/Chanteuse", "Rappeur/Rappeuse", "Guitariste", "Bassiste", 
-    "Batteur/Batteuse", "Claviériste", "Pianiste", "Violoniste", 
-    "Violoncelliste", "Flûtiste", "Saxophoniste", "Trompettiste", 
-    "Tromboniste", "Percussionniste", "Harmoniciste", 
-    "Compositeur/Compositrice", "Arrangeur/Arrangeuse", 
-    "Producteur/Productrice", "Ingénieur(e) du son", "DJ"
-  ];;
-
 
   const handleNameChange = () => {
     setIsEditingName(true);
@@ -81,54 +70,164 @@ const ProfilScreen = () => {
     setIsEditingDescription(true);
   };
 
-  // const handleNameSubmit = () => {
-  //   if (artist) {
-  //     const updatedName = newName.trim();
-  //     const updatedArtist = { ...artist, name: updatedName };
-  //     setArtist(updatedArtist);
-  //     setIsEditingName(false);
-  //   }
-  // };
+  const handleNameSubmit = async () => {
+    if (artist) {
+      const updatedName = newName.trim();
+      const updatedArtist = { ...artist, name: updatedName };
+      console.log(artist.email)
+      try {
+        const response = await fetch(`userID${loginId}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: loginId,
+            name: updatedName,
+            email: artist.email,
+            job: artist.job,
+            genre: artist.genre,
+            description: artist.description,
+            image: artist.image,
+          }),
+        });
+
+        if (response.ok) {
+          const updatedData = await response.json();
+          setArtist(updatedData);
+          setIsEditingName(false);
+        } else {
+          const errorData = await response.json();
+          console.error('Failed to update name:', errorData);
+          setError('Failed to update name');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        setError('Error updating name');
+      }
+    }
+  };
 
 
-  // const submitRole = ()=>{
-  //   if (artist) {
-  //     const updatedRole = newRole.trim();
-  //     const updatedArtist = { ...artist, role: updatedRole };
-  //     setArtist(updatedArtist);
-  //     setIsEditingRole(false);
-  //     setNewRole(updatedRole);
-  //   }
-  // }
+  const submitRole = async ()=>{
+    if (artist) {
+      const updatedRole = newRole.trim();
+      const updatedArtist = { ...artist, role: updatedRole };
+      try {
+        const response = await fetch(`userId${loginId}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: loginId,
+            name: artist.name,
+            email: artist.email,
+            job: updatedRole,
+            genre: artist.genre,
+            description: artist.description,
+            image: artist.image,
+          }),
+        });
 
-  // const submitGenre = ()=>{
-  //   if (artist) {
-  //     const updatedGenre = newGenre.trim();
-  //     const updatedArtist = { ...artist, genre: updatedGenre };
-  //     setArtist(updatedArtist);
-  //     setIsEditingGenre(false);
-  //     setNewGenre(updatedGenre);
-  //   }
-  // }
+        if (response.ok) {
+          const updatedData = await response.json();
+          setArtist(updatedData);
+          setIsEditingRole(false);
+        } else {
+          const errorData = await response.json();
+          console.error('Failed to update name:', errorData);
+          setError('Failed to update name');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        setError('Error updating name');
+      }
+    }
+  };
 
-  // const handleDescriptionSubmit = () => {
-  //   if (artist) {
-  //     const updatedDescription = newDescription.trim();
-  //     const updatedArtist = { ...artist, description: updatedDescription };
-  //     setArtist(updatedArtist);
-  //     setIsEditingDescription(false);
-  //     setNewDescription(updatedDescription)
-  //   }
-  // };
+  const submitGenre = async ()=>{
+    if (artist) {
+      const updatedGenre = newGenre.trim();
+      const updatedArtist = { ...artist, genre: updatedGenre };
+      try {
+        const response = await fetch(`userID${loginId}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: loginId,
+            name: artist.name,
+            email: artist.email,
+            job: artist.job,
+            genre: updatedGenre,
+            description: artist.description,
+            image: artist.image,
+          }),
+        });
+
+        if (response.ok) {
+          const updatedData = await response.json();
+          setArtist(updatedData);
+          setIsEditingGenre(false);
+        } else {
+          const errorData = await response.json();
+          console.error('Failed to update name:', errorData);
+          setError('Failed to update name');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        setError('Error updating name');
+      }
+    }
+  }
+
+  const handleDescriptionSubmit = async () => {
+    if (artist) {
+      const updatedDescritpion = newDescription.trim();
+      const updatedArtist = { ...artist, description: updatedDescritpion };
+      try {
+        const response = await fetch(`userID${loginId}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: loginId,
+            name: artist.name,
+            email: artist.email,
+            job: artist.job,
+            genre: artist.genre,
+            description: updatedDescritpion,
+            image: artist.image,
+          }),
+        });
+
+        if (response.ok) {
+          const updatedData = await response.json();
+          setArtist(updatedData);
+          setIsEditingDescription(false);
+        } else {
+          const errorData = await response.json();
+          console.error('Failed to update name:', errorData);
+          setError('Failed to update name');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        setError('Error updating name');
+      }
+    }
+  };
 
   return (
     <ScrollView style={styles.screen}>
       {artist ? (
         <>
           <View style={styles.test}>
-          {artist.imageUrl ? (<Image
+          {artist.image ? (<Image
                 style={styles.image}
-                source={{uri : artist.imageUrl}}
+                source={{uri : artist.image}}
             />):(   
                 <Image
                 style={styles.image}
@@ -162,7 +261,7 @@ const ProfilScreen = () => {
               <Text style={styles.label}>Métier :</Text>
               <RNPickerSelect
                 onValueChange={(value) => setNewRole(value)}
-                items={roles.map(role => ({ label: role, value: role }))}
+                items={job.jobs}
                 value={newRole}
                 style={{
                   inputIOS: styles.inputIOS,
@@ -197,7 +296,7 @@ const ProfilScreen = () => {
               <Text style={styles.label}>Genre :</Text>
               <RNPickerSelect
                 onValueChange={(value) => setNewGenre(value)}
-                items={genres.map(genre => ({ label: genre, value: genre }))}
+                items={genre.genres}
                 value={newGenre}
                 style={{
                   inputIOS: styles.inputIOS,

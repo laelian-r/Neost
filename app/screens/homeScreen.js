@@ -5,28 +5,38 @@ import ArtistProfile from '../components/profilArtist';
 import fakeData from '../../fakeData.json';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { userFetch } from '../../hook/UserFetch';
+import job from '../../job.json'
+import genre from '../../genre.json'
 
 
 const HomeScreen = () => {
   const [searchText, setSearchText] = useState('');
   const [selectJob, setSelectJob] = useState('');
   const [selectStyle, setSelectStyle] = useState('');
-  const [artists, isLoading] = userFetch()
+  const [artists, isLoadingArtists] = userFetch()
+  const [dataArtist, setDataArtist] = useState('')
 
 
   useEffect(() => {
-    const filteredArtists = fakeData.filter(artist => {
-      const jobMatch = selectJob ? artist.job === selectJob : true;
-      const styleMatch = selectStyle ? artist.genre === selectStyle : true;
-      const searchMatch = searchText ? 
-        artist.name.toLowerCase().includes(searchText.toLowerCase()) ||
-        artist.job.toLowerCase().includes(searchText.toLowerCase()) ||
-        (artist.genre && artist.genre.toLowerCase().includes(searchText.toLowerCase()))
-        : true;
-      return jobMatch && styleMatch && searchMatch;
-    });
-    // setArtists(filteredArtists);
-  }, [selectJob, selectStyle, searchText]);
+    setDataArtist(artists);
+  }, [artists]);
+
+  useEffect(() => {
+    if (artists) {
+      const filteredArtists = artists.filter(artist => {
+        const jobMatch = selectJob ? artist.job === selectJob : true;
+        const styleMatch = selectStyle ? artist.genre === selectStyle : true;
+        const searchMatch = searchText ? 
+          artist.name.toLowerCase().includes(searchText.toLowerCase()) ||
+          artist.job.toLowerCase().includes(searchText.toLowerCase()) ||
+          (artist.genre && artist.genre.toLowerCase().includes(searchText.toLowerCase()))
+          : true;
+        return jobMatch && styleMatch && searchMatch;
+      });
+      setDataArtist(filteredArtists);
+    }
+  }, [selectJob, selectStyle, searchText, artists]);
+
 
   return (
     <ScrollView style={styles.screen}>
@@ -41,28 +51,7 @@ const HomeScreen = () => {
       <Text style={styles.text}>Métier :</Text>
       <RNPickerSelect
         onValueChange={(value) => setSelectJob(value)}
-        items={[
-          { label: 'Arrangeur/Arrangeuse', value: 'Arrangeur/Arrangeuse' },
-          { label: 'Bassiste', value: 'Bassiste' },
-          { label: 'Batteur/Batteuse', value: 'Batteur/Batteuse' },
-          { label: 'Chanteur/Chanteuse', value: 'Chanteur/Chanteuse' },
-          { label: 'Claviériste', value: 'Claviériste' },
-          { label: 'Compositeur/Compositrice', value: 'Compositeur/Compositrice' },
-          { label: 'DJ', value: 'DJ' },
-          { label: 'Flûtiste', value: 'Flûtiste' },
-          { label: 'Guitariste', value: 'Guitariste' },
-          { label: 'Harmoniciste', value: 'Harmoniciste' },
-          { label: 'Ingénieur(e) du son', value: 'Ingénieur(e) du son' },
-          { label: 'Pianiste', value: 'Pianiste' },
-          { label: 'Percussionniste', value: 'Percussionniste' },
-          { label: 'Producteur/Productrice', value: 'Producteur/Productrice' },
-          { label: 'Rappeur/Rappeuse', value: 'Rappeur/Rappeuse' },
-          { label: 'Saxophoniste', value: 'Saxophoniste' },
-          { label: 'Tromboniste', value: 'Tromboniste' },
-          { label: 'Trompettiste', value: 'Trompettiste' },
-          { label: 'Violoncelliste', value: 'Violoncelliste' },
-          { label: 'Violoniste', value: 'Violoniste' }
-        ]}
+        items={job.jobs}
         style={{
           inputIOS: styles.inputIOS,
           inputAndroid: styles.inputAndroid,
@@ -74,39 +63,7 @@ const HomeScreen = () => {
       <Text style={styles.text}>Genre :</Text>
       <RNPickerSelect
         onValueChange={(value) => setSelectStyle(value)}
-        items={[
-          { label: 'Alternative', value: 'Alternative' },
-          { label: 'Ambient', value: 'Ambient' },
-          { label: 'Bluegrass', value: 'Bluegrass' },
-          { label: 'Blues', value: 'Blues' },
-          { label: 'Chill-out', value: 'Chill-out' },
-          { label: 'Classique', value: 'Classique' },
-          { label: 'Country', value: 'Country' },
-          { label: 'Dancehall', value: 'Dancehall' },
-          { label: 'Disco', value: 'Disco' },
-          { label: 'Electro', value: 'Electro' },
-          { label: 'Funk', value: 'Funk' },
-          { label: 'Gospel', value: 'Gospel' },
-          { label: 'Hardcore', value: 'Hardcore' },
-          { label: 'Hip-Hop/Rap', value: 'Hip-Hop/Rap' },
-          { label: 'House', value: 'House' },
-          { label: 'Indie', value: 'Indie' },
-          { label: 'Jazz', value: 'Jazz' },
-          { label: 'Metal', value: 'Metal' },
-          { label: 'Pop', value: 'Pop' },
-          { label: 'Posé', value: 'Posé' },
-          { label: 'Punk', value: 'Punk' },
-          { label: 'R&B', value: 'R&B' },
-          { label: 'Reggae', value: 'Reggae' },
-          { label: 'Reggaeton', value: 'Reggaeton' },
-          { label: 'Rock', value: 'Rock' },
-          { label: 'Ska', value: 'Ska' },
-          { label: 'Soul', value: 'Soul' },
-          { label: 'Techno', value: 'Techno' },
-          { label: 'Trance', value: 'Trance' },
-          { label: 'Trap', value: 'Trap' },
-          { label: 'Variété', value: 'Variété' }
-        ]}
+        items={genre.genres}
         style={{
           inputIOS: styles.inputIOS,
           inputAndroid: styles.inputAndroid,
@@ -116,9 +73,14 @@ const HomeScreen = () => {
       />
 
       <View>
-        {artists.map((artist) => (
-          <ArtistProfile key={artist.id} artistData={artist} />
-        ))}
+        {isLoadingArtists ? (
+          <Text>en chargement</Text>
+        ):(
+          dataArtist.map((artist) => (
+            <ArtistProfile key={artist.id} artistData={artist} />
+          ))
+        )}
+
       </View>
     </ScrollView>
   );
