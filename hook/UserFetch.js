@@ -9,7 +9,7 @@ export function userFetch(){
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('');
+                const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/user');
                 const data = await response.json();
 
                 setUser(data);

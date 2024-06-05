@@ -39,7 +39,7 @@ const ProfilScreen = () => {
             id = loginIdR
           }
           try {
-            const response = await fetch(`${id}`);
+            const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/user/{user_id}');
             const data = await response.json();
             setArtist(data);
             setIsLoading(false);
@@ -79,7 +79,7 @@ const ProfilScreen = () => {
       const updatedName = newName.trim();
       const updatedArtist = { ...artist, name: updatedName };
       try {
-        const response = await fetch(`${id}`, {
+        const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/user/{user_id}', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -120,7 +120,7 @@ const ProfilScreen = () => {
       const updatedRole = newRole.trim();
       const updatedArtist = { ...artist, role: updatedRole };
       try {
-        const response = await fetch(`${id}`, {
+        const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/user/{user_id}', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -160,7 +160,7 @@ const ProfilScreen = () => {
       const updatedGenre = newGenre.trim();
       const updatedArtist = { ...artist, genre: updatedGenre };
       try {
-        const response = await fetch(`${id}`, {
+        const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/user/{user_id}', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -200,7 +200,7 @@ const ProfilScreen = () => {
       const updatedDescritpion = newDescription.trim();
       const updatedArtist = { ...artist, description: updatedDescritpion };
       try {
-        const response = await fetch(`${id}`, {
+        const response = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/user/{user_id}', {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',

@@ -61,7 +61,7 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
   const handleRegister = async () => {
     if(email && password && name && SelectJob && description){
       try {
-        const response = await fetch(``, {
+        const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/auth/signup`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
         });
         const data = await response.json();
     if (response.ok) {
-      const userResponse = await fetch('', {
+      const userResponse = await fetch('https://x8ki-letl-twmt.n7.xano.io/api:GC38qUqU/auth/me', {
           headers: {
               'Authorization': `Bearer ${data.authToken}`
           },
