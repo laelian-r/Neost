@@ -44,11 +44,11 @@ const HomeScreen = () => {
         onChangeText={text => setSearchText(text)}
         value={searchText}
         style={styles.search}
-        placeholder="Rechercher par nom, genre ou métier"
+        placeholder="Rechercher par nom, genre ou Rôle"
         placeholderTextColor="#aaa"
       />
 
-      <Text style={styles.text}>Métier :</Text>
+      <Text style={styles.text}>Rôle :</Text>
       <RNPickerSelect
         onValueChange={(value) => setSelectJob(value)}
         items={job.jobs}
@@ -57,7 +57,7 @@ const HomeScreen = () => {
           inputAndroid: styles.inputAndroid,
           iconContainer: styles.iconContainer
         }}
-        placeholder={{ label: "Aucun métier prédéfini", value: null }}
+        placeholder={{ label: "Aucun rôle prédéfini", value: null }}
       />
 
       <Text style={styles.text}>Genre :</Text>

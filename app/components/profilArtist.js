@@ -50,6 +50,7 @@ const ArtistProfile = ({ artistData }) => {
             <View style={styles.restContainer}>
                 <Text style={styles.name}>{artistInfo.name}</Text>
                 <Text style={styles.role}>{artistInfo.job}</Text>
+                <Text style={styles.genre}>{artistInfo.genre}</Text>
                 <Text style={styles.description}>{reduceDescription(artistInfo.description, 10)}</Text>
                 <Pressable onPress={navigateToProfile} style={styles.button}>
                     <Text style={styles.buttonText}>Voir plus</Text>
@@ -93,9 +94,16 @@ const styles = StyleSheet.create({
         textAlign: 'start',
         fontWeight: 'bold',
     },
+    genre: {
+        fontSize: 15,
+        color: '#b2b9c1',
+        marginTop: 2,
+        textAlign: 'start',
+        fontWeight: 'bold'
+    },
     description: {
         fontSize: 14,
-        marginTop: 2,
+        marginTop: 16,
         textAlign: 'start',
         color: 'gray'
     },

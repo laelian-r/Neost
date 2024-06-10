@@ -111,7 +111,7 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
   return (
     <ScrollView style={styles.ScrollContainer}>
 
-<View style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Inscription</Text>
       <TextInput
         style={styles.input}
@@ -139,7 +139,7 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
       />
 
       <View style={styles.inputsSelect}>
-        <Text style={styles.text}>Métier :</Text>
+        <Text style={styles.text}>Rôle :</Text>
         <RNPickerSelect
           onValueChange={(value) => setSelectJob(value)}
           items={job.jobs}
@@ -148,7 +148,7 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
             inputAndroid: styles.inputAndroid,
             iconContainer: styles.iconContainer
           }}
-          placeholder={{ label: "Aucun métier prédéfini", value: null }}
+          placeholder={{ label: "Quel est votre rôle sur Neost ?", value: null }}
         />
 
         <Text style={styles.text}>Genre :</Text>
@@ -175,7 +175,7 @@ const RegisterScreen = ({ onRegisterSuccess }) => {
         onChangeText={changeTextDescription}
       />
 
-<TextInput
+      <TextInput
         style={styles.description}
         underlineColorAndroid="transparent"
         placeholder="URL d'une image (pas obligatoire)"
